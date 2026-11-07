@@ -3,7 +3,7 @@ requires = ["maturin>=1.5,<2.0"]
 build-backend = "maturin"
 
 [project]
-name = "polars_ta_lib"
+name = "polars_ta_lib_extension"
 description = "237 TA-Lib indicators as native Polars expression plugins"
 readme = "README.md"
 requires-python = ">=3.11"

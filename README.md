@@ -32,12 +32,12 @@ global initialization, and no per-row Python callbacks.
 
 ## Install
 
-> The targeted PyPI name is `polars_ta_lib` (canonical: `polars-ta-lib`);
+> The targeted PyPI name is `polars_ta_lib_extension` (canonical: `polars-ta-lib-extension`);
 > it is currently unoccupied. Publication is pending, so build from source for now.
 
 ```bash
 # from PyPI, once published
-pip install polars_ta_lib
+pip install polars_ta_lib_extension
 
 # from source
 uv venv
@@ -46,6 +46,9 @@ uv run maturin develop --uv
 ```
 
 Requirements: Python 3.11+, Polars 2.1+, Rust 1.95+.
+
+PyPI distribution is `polars_ta_lib_extension`; the Python import remains
+`polars_ta_lib`.
 
 ### Compatibility
 

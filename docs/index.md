@@ -11,8 +11,8 @@ TA-Lib indicators as Polars expression plugins.
 ## Install
 
 ```bash
-# from PyPI (once published; PyPI normalizes the name to polars-ta-lib)
-pip install polars_ta_lib
+# from PyPI (once published; PyPI normalizes the name to polars-ta-lib-extension)
+pip install polars_ta_lib_extension
 
 # from source
 uv venv
@@ -21,6 +21,9 @@ uv run maturin develop --uv
 ```
 
 Requires Python 3.11+ and Polars 2.1+.
+
+PyPI distribution is `polars_ta_lib_extension`; the Python import remains
+`polars_ta_lib`.
 
 ## Quick start
 
