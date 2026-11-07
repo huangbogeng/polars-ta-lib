@@ -5,7 +5,6 @@ mod expressions;
 mod meta;
 
 use pyo3::prelude::*;
-use pyo3_polars::PolarsAllocator;
 
 /// Every TA-Lib function's Python-facing metadata, as JSON.
 #[pyfunction]
@@ -19,8 +18,3 @@ fn _internal(_py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(functions_json, m)?)?;
     Ok(())
 }
-
-// Relay allocations to the allocator used by the host Polars, matching the
-// cookiecutter plugin template.
-#[global_allocator]
-static ALLOC: PolarsAllocator = PolarsAllocator::new();

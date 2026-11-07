@@ -2,11 +2,20 @@ name: CI
 
 on:
   push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
@@ -37,8 +46,16 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - uses: dtolnay/rust-toolchain@1.95.0
+        with:
+          components: rustfmt, clippy
 
       - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: polars-ta-lib
 
       - name: Create environment
         shell: bash

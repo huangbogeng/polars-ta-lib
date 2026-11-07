@@ -98,7 +98,7 @@ polars-ta-lib/
 │   ├── architecture.md      # 生成
 │   └── plan.md              # 生成
 ├── src/
-│   ├── lib.rs              # PyO3 模块、PolarsAllocator、metadata 导出
+│   ├── lib.rs              # PyO3 模块、metadata 导出
 │   ├── expressions.rs      # 唯一 #[polars_expr] fn call
 │   ├── engine.rs           # TA-Lib 安全层
 │   └── meta.rs             # 元数据、P1 命名、输出 dtype
@@ -141,7 +141,7 @@ ta-lib = "=0.8.3"
 `src/lib.rs`：
 
 - `#[pymodule] fn _internal(...)`，导出 `__version__` 和 `functions_json()`。
-- `#[global_allocator] static ALLOC: PolarsAllocator = PolarsAllocator::new();`
+- 不使用 `PolarsAllocator`：macOS 导入期申请 allocator capsule 会触发段错误；输出 buffer 的 Arrow release callback 已负责释放。
 - `functions_json()` 返回全部 237 个函数的元数据 JSON（见第 9 节）。
 
 `src/expressions.rs`：
