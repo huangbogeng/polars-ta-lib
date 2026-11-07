@@ -930,10 +930,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#121-fast-oracle" class="md-nav__link">
+  <a href="#121-golden-regression" class="md-nav__link">
     <span class="md-ellipsis">
       
-        12.1 fast oracle
+        12.1 Golden regression
       
     </span>
   </a>
@@ -1340,10 +1340,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#121-fast-oracle" class="md-nav__link">
+  <a href="#121-golden-regression" class="md-nav__link">
     <span class="md-ellipsis">
       
-        12.1 fast oracle
+        12.1 Golden regression
       
     </span>
   </a>
@@ -1438,7 +1438,7 @@
 <li>输入契约严格：只接受稠密、有限的 <code>Float64</code>；缺失值由调用方处理。</li>
 <li>输出前导 warm-up 区使用 Polars null，而不是 NaN 或 0。</li>
 <li>Python 参数名和 Struct 字段名使用 snake_case；TA-Lib 原始名保留在元数据/文档中。</li>
-<li>以 <code>polars-talib-fast==2.0.0</code> 作为数值对照 oracle，但不复制其 API 或缺失值语义。</li>
+<li>使用本地 golden 回归 fixtures 验证 237 个函数的 dtype、字段、null 掩码和数值。</li>
 </ul>
 <h3 id="_2">非目标（首版）</h3>
 <ul>
@@ -1447,7 +1447,7 @@
 <li>streaming / 增量 API。</li>
 <li>Series 级 API（<code>pta.sma(series)</code>）。</li>
 <li>自定义指标。</li>
-<li>与 <code>polars-talib-fast</code> 的 API 或 NaN 语义完全兼容。</li>
+<li>与其他实现的 API 或缺失值语义完全兼容。</li>
 </ul>
 <h2 id="2">2. 决策记录</h2>
 <table>
@@ -1462,7 +1462,7 @@
 <tr>
 <td>D1</td>
 <td>项目定位</td>
-<td>独立实现；cookiecutter 规范骨架 + 分层引擎；fast 仅作测试参照</td>
+<td>独立实现；cookiecutter 规范骨架 + 分层引擎</td>
 </tr>
 <tr>
 <td>D2</td>
@@ -1497,7 +1497,7 @@
 <tr>
 <td>D8</td>
 <td>测试参照</td>
-<td><code>polars-talib-fast==2.0.0</code> + 自有边界测试；归一化 null/NaN 后比较</td>
+<td>本地 golden 回归 fixtures + 自有边界测试</td>
 </tr>
 <tr>
 <td>D9</td>
@@ -1845,21 +1845,18 @@ Python 模块出口        src/lib.rs
 <li>严格有限性扫描是 N1 的固定 O(n) 成本；在 1M 行上应与指标计算同量级或更小。</li>
 </ul>
 <h2 id="12">12. 测试策略</h2>
-<h3 id="121-fast-oracle">12.1 fast oracle</h3>
+<h3 id="121-golden-regression">12.1 Golden regression</h3>
 <ul>
-<li>dev 依赖固定 <code>polars-talib-fast==2.0.0</code>。</li>
-<li>同一输入、同一参数，同时运行两个库。</li>
+<li><code>tests/golden/expected.npz</code> + <code>manifest.json</code> 保存 237 个函数在默认参数和 4 个代表参数用例下的输出。</li>
 <li>比较：</li>
 <li>dtype；</li>
 <li>Struct 字段名与顺序；</li>
 <li>输出长度；</li>
-<li>null/NaN 归一化后的数值；</li>
+<li>null 掩码与数值；</li>
 <li>分组 <code>.over()</code> 结果。</li>
-<li>归一化规则：</li>
-<li>fast 的前导 NaN/0 → null；</li>
-<li>我们的前导 null 保持 null；</li>
-<li>其他位置的 null/NaN 视为不一致（N1 下不应出现）。</li>
-<li>输入只使用稠密、有限数据；null/NaN 行为由我们自己的测试覆盖。</li>
+<li>浮点数值使用 <code>rtol=1e-12</code> / <code>atol=1e-12</code> 比较，容忍跨平台 libm 的 1–2 ULP 差异；NaN 位置必须一致。</li>
+<li>输入只使用稠密、有限数据；null/NaN 行为由边界测试覆盖。</li>
+<li>重新生成：<code>python tools/generate_golden.py</code>，仅在确认输出变化时执行。</li>
 </ul>
 <h3 id="122">12.2 自有测试</h3>
 <table>
@@ -1877,6 +1874,10 @@ Python 模块出口        src/lib.rs
 <tr>
 <td><code>test_values.py</code></td>
 <td>默认参数、短窗口、多输出、分组、<code>ma_type</code> 字符串/整数</td>
+</tr>
+<tr>
+<td><code>test_golden.py</code></td>
+<td>237 函数 + 4 个参数用例的 golden 回归：dtype、Struct 字段、null 掩码、数值</td>
 </tr>
 <tr>
 <td><code>test_edges.py</code></td>

@@ -766,10 +766,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#m5-fast" class="md-nav__link">
+  <a href="#m5-golden" class="md-nav__link">
     <span class="md-ellipsis">
       
-        M5 测试与 fast 对照
+        M5 测试与 golden 回归
       
     </span>
   </a>
@@ -960,10 +960,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#m5-fast" class="md-nav__link">
+  <a href="#m5-golden" class="md-nav__link">
     <span class="md-ellipsis">
       
-        M5 测试与 fast 对照
+        M5 测试与 golden 回归
       
     </span>
   </a>
@@ -1062,8 +1062,8 @@
 <li>M2 引擎：完成；引擎行为由 Python 对照测试覆盖（<code>extension-module</code> 下 <code>cargo test</code> 无法链接 Python 符号，因此不设 Rust 测试目标）。</li>
 <li>M3 插件边界：完成；N1、Struct、Int32、空/短序列、多 chunk 均验收。</li>
 <li>M4 Python API：完成；237 个顶层函数、签名、docstring、<code>.pyi</code>、<code>FUNCS</code>。</li>
-<li>M5 测试：24 个 pytest 通过；237 函数与 <code>polars-talib-fast==2.0.0</code> 在稠密有限数据上数值一致；参数、分组、边界、错误路径已覆盖。兼容性已验证：Polars 2.1.0 / Python 3.11、Polars 2.1.0 / Python 3.12。性能 smoke（dev build，1M 行）：SMA 28.7 ms、EMA 19.9 ms、RSI 21.6 ms、ATR 54.8 ms、MACD 27.3 ms（非硬阈值）。</li>
-<li>M6 打包：README、LICENSE、NOTICE、CI 工作流已加入；包名统一为 <code>polars_ta_lib</code>（PyPI 未占用；<code>polars_ta</code> import 与已有 <code>polars-ta</code> 冲突已消除）；release wheel 为 <code>cp311-abi3</code>（Python 3.11+，Polars 2.1+），已在 Python 3.11/3.12 + Polars 2.1.0 下验证（24 tests 通过）；MkDocs 文档已生成并通过 <code>mkdocs build --strict</code>；CI 已通过：Linux push/PR，macOS/Windows tag/manual。</li>
+<li>M5 测试：237 函数与本地 golden fixtures 一致；参数、分组、边界、错误路径已覆盖。兼容性已验证：Polars 2.1.0 / Python 3.11、Polars 2.1.0 / Python 3.12。性能 smoke（dev build，1M 行）：SMA 28.7 ms、EMA 19.9 ms、RSI 21.6 ms、ATR 54.8 ms、MACD 27.3 ms（非硬阈值）。</li>
+<li>M6 打包：PyPI 发行名 <code>polars_ta_lib_extension</code>（import <code>polars_ta_lib</code>），<code>0.1.0</code> 已发布；release wheel 为 <code>cp311-abi3</code>（Python 3.11+，Polars 2.1+），已在 Python 3.11/3.12 + Polars 2.1.0 下验证（23 tests 通过）；MkDocs 文档已生成并通过 <code>mkdocs build --strict</code>；CI 已通过：Linux push/PR，macOS/Windows tag/manual。</li>
 </ul>
 <h2 id="2">2. 里程碑</h2>
 <blockquote>
@@ -1194,11 +1194,13 @@
 <li><code>pta.ma(pl.col("close"), ma_type="sma")</code> 与整数 <code>0</code> 等价。</li>
 <li>未知参数/越界参数抛 <code>TypeError</code>/<code>ValueError</code>（Python 侧）或 <code>ComputeError</code>（Rust 侧）。</li>
 </ul>
-<h3 id="m5-fast">M5 测试与 fast 对照</h3>
+<h3 id="m5-golden">M5 测试与 golden 回归</h3>
 <p>任务：</p>
 <ul>
-<li>[ ] dev 依赖：<code>polars-talib-fast==2.0.0</code>、<code>pytest</code>、<code>numpy</code></li>
-<li>[ ] <code>tests/conftest.py</code>：合成数据、归一化函数</li>
+<li>[ ] dev 依赖：<code>pytest</code>、<code>numpy</code></li>
+<li>[ ] <code>tests/conftest.py</code>：合成数据</li>
+<li>[ ] <code>tests/golden/</code>：<code>expected.npz</code> + <code>manifest.json</code>，由 <code>tools/generate_golden.py</code> 生成</li>
+<li>[ ] <code>tests/test_golden.py</code>：237 函数 + 参数用例回归</li>
 <li>[ ] <code>tests/test_api.py</code></li>
 <li>237 函数覆盖</li>
 <li>元数据与 <code>FUNCS</code>/签名一致</li>
@@ -1337,7 +1339,7 @@
 <h2 id="5">5. 常用命令</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># 环境</span>
 uv<span class="w"> </span>venv<span class="w"> </span>.venv
-uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--python<span class="w"> </span>.venv/bin/python<span class="w"> </span>maturin<span class="w"> </span>pytest<span class="w"> </span>numpy<span class="w"> </span><span class="s1">'polars&gt;=2.1,&lt;3'</span><span class="w"> </span><span class="s1">'polars-talib-fast==2.0.0'</span>
+uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--python<span class="w"> </span>.venv/bin/python<span class="w"> </span>maturin<span class="w"> </span>pytest<span class="w"> </span>numpy<span class="w"> </span><span class="s1">'polars&gt;=2.1,&lt;3'</span>
 
 <span class="c1"># 构建</span>
 <span class="nb">source</span><span class="w"> </span>.venv/bin/activate
@@ -1358,10 +1360,10 @@ maturin<span class="w"> </span>build<span class="w"> </span>--release
 <li><strong>函数名冲突</strong>：<code>max</code>、<code>min</code>、<code>sum</code>、<code>add</code>、<code>sub</code> 等会遮蔽 Python 内置；文档建议 <code>import polars_ta_lib as pta</code>，不要 <code>from polars_ta_lib import *</code>。</li>
 <li><strong>单 Real 默认 <code>close</code> 的合理性</strong>：<code>acos</code>/<code>ln</code>/<code>sqrt</code> 等数学函数默认 <code>close</code> 只是统一规则；如用户觉得别扭，后续可改为显式。</li>
 <li><strong>Int → Float64 精度</strong>：超过 2^53 的整数会丢精度；文档说明，必要时报错。</li>
-<li><strong>fast 对照的版本漂移</strong>：固定 <code>polars-talib-fast==2.0.0</code>；升级需重新评估归一化规则。</li>
+<li><strong>golden 更新</strong>：只有确认指标输出变化时才运行 <code>tools/generate_golden.py</code>，并在 PR 中说明原因。</li>
 <li><strong>Polars 版本</strong>：Rust 0.55.2 + Polars 2.1.x 为实测组合；<code>polars&gt;=2.1,&lt;3</code> 需在 CI 中覆盖。</li>
 <li><strong>性能</strong>：N1 的有限性扫描是固定成本；若 1M 行场景明显变慢，再考虑分块/SIMD，但不改变契约。</li>
-<li><strong>复用 fast 代码的许可</strong>：若直接改写 <code>talib.rs</code>，在 <code>NOTICE</code> 中保留 MIT 声明；测试只依赖其 wheel，不复制 golden 数据。</li>
+<li><strong>golden 数据许可</strong>：fixtures 由本项目生成，不包含第三方数据。</li>
 </ul>
 
 
