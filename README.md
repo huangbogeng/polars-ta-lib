@@ -229,12 +229,12 @@ uv run pytest -q
 
 The suite covers:
 
-- all 237 functions, compared against `polars-talib-fast==2.0.0`;
-- parameter parity (`SMA`, `BBANDS`, `MACD`, `STOCH`);
+- all 237 functions against committed golden regression fixtures;
+- parameter cases (`SMA`, `BBANDS`, `MACD`, `STOCH`);
 - grouped `.over()`, empty/short inputs, multi-chunk inputs;
 - `Int32`/`Float32` casts, null/NaN/Inf errors, invalid parameters.
 
-Current status: **24 tests passed**.
+Current status: **23 tests passed**.
 
 ## Documentation
 

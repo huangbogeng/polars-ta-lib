@@ -13,8 +13,8 @@
 - Multi-output indicators returned as `Struct` with Pythonic field names.
 - Generated signatures, docstrings, type stubs, and `FUNCS` metadata.
 - MkDocs Material API reference generated from TA-Lib metadata.
-- abi3 wheel build, CI matrix, and 24-test suite including 237-function parity
-  against `polars-talib-fast==2.0.0`.
+- abi3 wheel build, CI matrix, and golden regression suite
+  against committed golden regression fixtures.
 - PyPI distribution: `polars_ta_lib_extension`; Python import: `polars_ta_lib`.
 - Requires Python 3.11+ and Polars 2.1+.
 - Tested with Polars 2.1.0 on Python 3.11 and 3.12.

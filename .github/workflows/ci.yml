@@ -37,7 +37,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
 
       - name: Install dependencies
-        run: pip install maturin pytest numpy "polars==2.1.0" "polars-talib-fast==2.0.0"
+        run: pip install maturin pytest numpy "polars==2.1.0"
 
       - name: Install package
         run: pip install -e . --no-build-isolation
@@ -81,7 +81,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
 
       - name: Install dependencies
-        run: pip install maturin pytest numpy "polars==2.1.0" "polars-talib-fast==2.0.0"
+        run: pip install maturin pytest numpy "polars==2.1.0"
 
       - name: Install package
         run: pip install -e . --no-build-isolation

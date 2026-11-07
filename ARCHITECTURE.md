@@ -12,7 +12,7 @@
 - 输入契约严格：只接受稠密、有限的 `Float64`；缺失值由调用方处理。
 - 输出前导 warm-up 区使用 Polars null，而不是 NaN 或 0。
 - Python 参数名和 Struct 字段名使用 snake_case；TA-Lib 原始名保留在元数据/文档中。
-- 以 `polars-talib-fast==2.0.0` 作为数值对照 oracle，但不复制其 API 或缺失值语义。
+- 使用本地 golden 回归 fixtures 验证 237 个函数的 dtype、字段、null 掩码和数值。
 
 ### 非目标（首版）
 
@@ -21,20 +21,20 @@
 - streaming / 增量 API。
 - Series 级 API（`pta.sma(series)`）。
 - 自定义指标。
-- 与 `polars-talib-fast` 的 API 或 NaN 语义完全兼容。
+- 与其他实现的 API 或缺失值语义完全兼容。
 
 ## 2. 决策记录
 
 | 编号 | 决策 | 选择 |
 |---|---|---|
-| D1 | 项目定位 | 独立实现；cookiecutter 规范骨架 + 分层引擎；fast 仅作测试参照 |
+| D1 | 项目定位 | 独立实现；cookiecutter 规范骨架 + 分层引擎 |
 | D2 | 后端 | 官方 `ta-lib 0.8.3`，纯 Rust，无 C 绑定 |
 | D3 | API 形态 | 仅顶层函数；`pta.sma(...)`、`pta.atr(...)` |
 | D4 | 输入默认值 | C2：单 Real 默认 `close`；price 组件用同名列；多 Real 必须显式 |
 | D5 | 缺失值 | N1：输入严格校验；前导输出 Polars null；Int32 前导也是 null |
 | D6 | 命名 | P1：参数/Struct 字段 snake_case；函数名为 TA-Lib 名小写 |
 | D7 | 首版范围 | 237 函数 + 签名/docstring/`.pyi`/测试/打包；配置与 streaming 后置 |
-| D8 | 测试参照 | `polars-talib-fast==2.0.0` + 自有边界测试；归一化 null/NaN 后比较 |
+| D8 | 测试参照 | 本地 golden 回归 fixtures + 自有边界测试 |
 | D9 | 插件协议 | `pyo3-polars` 0.28 `#[polars_expr]` + `register_plugin_function` |
 | D10 | 包结构 | `python/polars_ta_lib` + extension `polars_ta_lib._internal` |
 
@@ -361,21 +361,18 @@ Real 输入的形态：
 
 ## 12. 测试策略
 
-### 12.1 fast oracle
+### 12.1 Golden regression
 
-- dev 依赖固定 `polars-talib-fast==2.0.0`。
-- 同一输入、同一参数，同时运行两个库。
+- `tests/golden/expected.npz` + `manifest.json` 保存 237 个函数在默认参数和 4 个代表参数用例下的输出。
 - 比较：
   - dtype；
   - Struct 字段名与顺序；
   - 输出长度；
-  - null/NaN 归一化后的数值；
+  - null 掩码与数值；
   - 分组 `.over()` 结果。
-- 归一化规则：
-  - fast 的前导 NaN/0 → null；
-  - 我们的前导 null 保持 null；
-  - 其他位置的 null/NaN 视为不一致（N1 下不应出现）。
-- 输入只使用稠密、有限数据；null/NaN 行为由我们自己的测试覆盖。
+- 浮点数值使用 `rtol=1e-12` / `atol=1e-12` 比较，容忍跨平台 libm 的 1–2 ULP 差异；NaN 位置必须一致。
+- 输入只使用稠密、有限数据；null/NaN 行为由边界测试覆盖。
+- 重新生成：`python tools/generate_golden.py`，仅在确认输出变化时执行。
 
 ### 12.2 自有测试
 
@@ -383,6 +380,7 @@ Real 输入的形态：
 |---|---|
 | `test_api.py` | 237 函数存在；参数/默认值/输出字段与元数据一致；签名可调用；`.pyi` 与元数据一致 |
 | `test_values.py` | 默认参数、短窗口、多输出、分组、`ma_type` 字符串/整数 |
+| `test_golden.py` | 237 函数 + 4 个参数用例的 golden 回归：dtype、Struct 字段、null 掩码、数值 |
 | `test_edges.py` | 空输入、短序列、多 chunk、Int/Float32 输入、null/NaN/Inf 报错、非法参数、长度不一致、未知函数、前导 null、Int32 前导 null、`MAXINDEX` 位置 |
 | `test_packaging.py` | `plugin_path` 可加载；`__version__`；`FUNCS` 数量（后续） |
 

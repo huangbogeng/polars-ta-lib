@@ -1,0 +1,2955 @@
+{
+  "outputs": [
+    {
+      "func": "AC",
+      "python_name": "ac",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v0",
+      "valid_key": "m0"
+    },
+    {
+      "func": "ACCBANDS",
+      "python_name": "accbands",
+      "case": "default",
+      "params": {},
+      "field": "upper_band",
+      "dtype": "float64",
+      "values_key": "v1",
+      "valid_key": "m1"
+    },
+    {
+      "func": "ACCBANDS",
+      "python_name": "accbands",
+      "case": "default",
+      "params": {},
+      "field": "middle_band",
+      "dtype": "float64",
+      "values_key": "v2",
+      "valid_key": "m2"
+    },
+    {
+      "func": "ACCBANDS",
+      "python_name": "accbands",
+      "case": "default",
+      "params": {},
+      "field": "lower_band",
+      "dtype": "float64",
+      "values_key": "v3",
+      "valid_key": "m3"
+    },
+    {
+      "func": "ACOS",
+      "python_name": "acos",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v4",
+      "valid_key": "m4"
+    },
+    {
+      "func": "AD",
+      "python_name": "ad",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v5",
+      "valid_key": "m5"
+    },
+    {
+      "func": "ADD",
+      "python_name": "add",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v6",
+      "valid_key": "m6"
+    },
+    {
+      "func": "ADOSC",
+      "python_name": "adosc",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v7",
+      "valid_key": "m7"
+    },
+    {
+      "func": "ADR",
+      "python_name": "adr",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v8",
+      "valid_key": "m8"
+    },
+    {
+      "func": "ADX",
+      "python_name": "adx",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v9",
+      "valid_key": "m9"
+    },
+    {
+      "func": "ADXR",
+      "python_name": "adxr",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v10",
+      "valid_key": "m10"
+    },
+    {
+      "func": "ALMA",
+      "python_name": "alma",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v11",
+      "valid_key": "m11"
+    },
+    {
+      "func": "AO",
+      "python_name": "ao",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v12",
+      "valid_key": "m12"
+    },
+    {
+      "func": "APO",
+      "python_name": "apo",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v13",
+      "valid_key": "m13"
+    },
+    {
+      "func": "AROON",
+      "python_name": "aroon",
+      "case": "default",
+      "params": {},
+      "field": "aroon_down",
+      "dtype": "float64",
+      "values_key": "v14",
+      "valid_key": "m14"
+    },
+    {
+      "func": "AROON",
+      "python_name": "aroon",
+      "case": "default",
+      "params": {},
+      "field": "aroon_up",
+      "dtype": "float64",
+      "values_key": "v15",
+      "valid_key": "m15"
+    },
+    {
+      "func": "AROONOSC",
+      "python_name": "aroonosc",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v16",
+      "valid_key": "m16"
+    },
+    {
+      "func": "ASI",
+      "python_name": "asi",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v17",
+      "valid_key": "m17"
+    },
+    {
+      "func": "ASIN",
+      "python_name": "asin",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v18",
+      "valid_key": "m18"
+    },
+    {
+      "func": "ATAN",
+      "python_name": "atan",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v19",
+      "valid_key": "m19"
+    },
+    {
+      "func": "ATR",
+      "python_name": "atr",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v20",
+      "valid_key": "m20"
+    },
+    {
+      "func": "AVGDEV",
+      "python_name": "avgdev",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v21",
+      "valid_key": "m21"
+    },
+    {
+      "func": "AVGPRICE",
+      "python_name": "avgprice",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v22",
+      "valid_key": "m22"
+    },
+    {
+      "func": "BBANDS",
+      "python_name": "bbands",
+      "case": "default",
+      "params": {},
+      "field": "upper_band",
+      "dtype": "float64",
+      "values_key": "v23",
+      "valid_key": "m23"
+    },
+    {
+      "func": "BBANDS",
+      "python_name": "bbands",
+      "case": "default",
+      "params": {},
+      "field": "middle_band",
+      "dtype": "float64",
+      "values_key": "v24",
+      "valid_key": "m24"
+    },
+    {
+      "func": "BBANDS",
+      "python_name": "bbands",
+      "case": "default",
+      "params": {},
+      "field": "lower_band",
+      "dtype": "float64",
+      "values_key": "v25",
+      "valid_key": "m25"
+    },
+    {
+      "func": "BBANDS",
+      "python_name": "bbands",
+      "case": "bbands_5",
+      "params": {
+        "time_period": 5,
+        "nb_dev_up": 2.0,
+        "nb_dev_dn": 2.0,
+        "ma_type": 1
+      },
+      "field": "upper_band",
+      "dtype": "float64",
+      "values_key": "v26",
+      "valid_key": "m26"
+    },
+    {
+      "func": "BBANDS",
+      "python_name": "bbands",
+      "case": "bbands_5",
+      "params": {
+        "time_period": 5,
+        "nb_dev_up": 2.0,
+        "nb_dev_dn": 2.0,
+        "ma_type": 1
+      },
+      "field": "middle_band",
+      "dtype": "float64",
+      "values_key": "v27",
+      "valid_key": "m27"
+    },
+    {
+      "func": "BBANDS",
+      "python_name": "bbands",
+      "case": "bbands_5",
+      "params": {
+        "time_period": 5,
+        "nb_dev_up": 2.0,
+        "nb_dev_dn": 2.0,
+        "ma_type": 1
+      },
+      "field": "lower_band",
+      "dtype": "float64",
+      "values_key": "v28",
+      "valid_key": "m28"
+    },
+    {
+      "func": "BBW",
+      "python_name": "bbw",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v29",
+      "valid_key": "m29"
+    },
+    {
+      "func": "BETA",
+      "python_name": "beta",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v30",
+      "valid_key": "m30"
+    },
+    {
+      "func": "BOP",
+      "python_name": "bop",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v31",
+      "valid_key": "m31"
+    },
+    {
+      "func": "CCI",
+      "python_name": "cci",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v32",
+      "valid_key": "m32"
+    },
+    {
+      "func": "CDL2CROWS",
+      "python_name": "cdl2crows",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v33",
+      "valid_key": "m33"
+    },
+    {
+      "func": "CDL3BLACKCROWS",
+      "python_name": "cdl3blackcrows",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v34",
+      "valid_key": "m34"
+    },
+    {
+      "func": "CDL3INSIDE",
+      "python_name": "cdl3inside",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v35",
+      "valid_key": "m35"
+    },
+    {
+      "func": "CDL3LINESTRIKE",
+      "python_name": "cdl3linestrike",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v36",
+      "valid_key": "m36"
+    },
+    {
+      "func": "CDL3OUTSIDE",
+      "python_name": "cdl3outside",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v37",
+      "valid_key": "m37"
+    },
+    {
+      "func": "CDL3STARSINSOUTH",
+      "python_name": "cdl3starsinsouth",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v38",
+      "valid_key": "m38"
+    },
+    {
+      "func": "CDL3WHITESOLDIERS",
+      "python_name": "cdl3whitesoldiers",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v39",
+      "valid_key": "m39"
+    },
+    {
+      "func": "CDLABANDONEDBABY",
+      "python_name": "cdlabandonedbaby",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v40",
+      "valid_key": "m40"
+    },
+    {
+      "func": "CDLADVANCEBLOCK",
+      "python_name": "cdladvanceblock",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v41",
+      "valid_key": "m41"
+    },
+    {
+      "func": "CDLBELTHOLD",
+      "python_name": "cdlbelthold",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v42",
+      "valid_key": "m42"
+    },
+    {
+      "func": "CDLBREAKAWAY",
+      "python_name": "cdlbreakaway",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v43",
+      "valid_key": "m43"
+    },
+    {
+      "func": "CDLCLOSINGMARUBOZU",
+      "python_name": "cdlclosingmarubozu",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v44",
+      "valid_key": "m44"
+    },
+    {
+      "func": "CDLCONCEALBABYSWALL",
+      "python_name": "cdlconcealbabyswall",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v45",
+      "valid_key": "m45"
+    },
+    {
+      "func": "CDLCOUNTERATTACK",
+      "python_name": "cdlcounterattack",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v46",
+      "valid_key": "m46"
+    },
+    {
+      "func": "CDLDARKCLOUDCOVER",
+      "python_name": "cdldarkcloudcover",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v47",
+      "valid_key": "m47"
+    },
+    {
+      "func": "CDLDOJI",
+      "python_name": "cdldoji",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v48",
+      "valid_key": "m48"
+    },
+    {
+      "func": "CDLDOJISTAR",
+      "python_name": "cdldojistar",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v49",
+      "valid_key": "m49"
+    },
+    {
+      "func": "CDLDRAGONFLYDOJI",
+      "python_name": "cdldragonflydoji",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v50",
+      "valid_key": "m50"
+    },
+    {
+      "func": "CDLENGULFING",
+      "python_name": "cdlengulfing",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v51",
+      "valid_key": "m51"
+    },
+    {
+      "func": "CDLEVENINGDOJISTAR",
+      "python_name": "cdleveningdojistar",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v52",
+      "valid_key": "m52"
+    },
+    {
+      "func": "CDLEVENINGSTAR",
+      "python_name": "cdleveningstar",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v53",
+      "valid_key": "m53"
+    },
+    {
+      "func": "CDLGAPSIDESIDEWHITE",
+      "python_name": "cdlgapsidesidewhite",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v54",
+      "valid_key": "m54"
+    },
+    {
+      "func": "CDLGRAVESTONEDOJI",
+      "python_name": "cdlgravestonedoji",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v55",
+      "valid_key": "m55"
+    },
+    {
+      "func": "CDLHAMMER",
+      "python_name": "cdlhammer",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v56",
+      "valid_key": "m56"
+    },
+    {
+      "func": "CDLHANGINGMAN",
+      "python_name": "cdlhangingman",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v57",
+      "valid_key": "m57"
+    },
+    {
+      "func": "CDLHARAMI",
+      "python_name": "cdlharami",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v58",
+      "valid_key": "m58"
+    },
+    {
+      "func": "CDLHARAMICROSS",
+      "python_name": "cdlharamicross",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v59",
+      "valid_key": "m59"
+    },
+    {
+      "func": "CDLHIGHWAVE",
+      "python_name": "cdlhighwave",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v60",
+      "valid_key": "m60"
+    },
+    {
+      "func": "CDLHIKKAKE",
+      "python_name": "cdlhikkake",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v61",
+      "valid_key": "m61"
+    },
+    {
+      "func": "CDLHIKKAKEMOD",
+      "python_name": "cdlhikkakemod",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v62",
+      "valid_key": "m62"
+    },
+    {
+      "func": "CDLHOMINGPIGEON",
+      "python_name": "cdlhomingpigeon",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v63",
+      "valid_key": "m63"
+    },
+    {
+      "func": "CDLIDENTICAL3CROWS",
+      "python_name": "cdlidentical3crows",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v64",
+      "valid_key": "m64"
+    },
+    {
+      "func": "CDLINNECK",
+      "python_name": "cdlinneck",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v65",
+      "valid_key": "m65"
+    },
+    {
+      "func": "CDLINVERTEDHAMMER",
+      "python_name": "cdlinvertedhammer",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v66",
+      "valid_key": "m66"
+    },
+    {
+      "func": "CDLKICKING",
+      "python_name": "cdlkicking",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v67",
+      "valid_key": "m67"
+    },
+    {
+      "func": "CDLKICKINGBYLENGTH",
+      "python_name": "cdlkickingbylength",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v68",
+      "valid_key": "m68"
+    },
+    {
+      "func": "CDLLADDERBOTTOM",
+      "python_name": "cdlladderbottom",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v69",
+      "valid_key": "m69"
+    },
+    {
+      "func": "CDLLONGLEGGEDDOJI",
+      "python_name": "cdllongleggeddoji",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v70",
+      "valid_key": "m70"
+    },
+    {
+      "func": "CDLLONGLINE",
+      "python_name": "cdllongline",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v71",
+      "valid_key": "m71"
+    },
+    {
+      "func": "CDLMARUBOZU",
+      "python_name": "cdlmarubozu",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v72",
+      "valid_key": "m72"
+    },
+    {
+      "func": "CDLMATCHINGLOW",
+      "python_name": "cdlmatchinglow",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v73",
+      "valid_key": "m73"
+    },
+    {
+      "func": "CDLMATHOLD",
+      "python_name": "cdlmathold",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v74",
+      "valid_key": "m74"
+    },
+    {
+      "func": "CDLMORNINGDOJISTAR",
+      "python_name": "cdlmorningdojistar",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v75",
+      "valid_key": "m75"
+    },
+    {
+      "func": "CDLMORNINGSTAR",
+      "python_name": "cdlmorningstar",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v76",
+      "valid_key": "m76"
+    },
+    {
+      "func": "CDLONNECK",
+      "python_name": "cdlonneck",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v77",
+      "valid_key": "m77"
+    },
+    {
+      "func": "CDLPIERCING",
+      "python_name": "cdlpiercing",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v78",
+      "valid_key": "m78"
+    },
+    {
+      "func": "CDLRICKSHAWMAN",
+      "python_name": "cdlrickshawman",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v79",
+      "valid_key": "m79"
+    },
+    {
+      "func": "CDLRISEFALL3METHODS",
+      "python_name": "cdlrisefall3methods",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v80",
+      "valid_key": "m80"
+    },
+    {
+      "func": "CDLSEPARATINGLINES",
+      "python_name": "cdlseparatinglines",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v81",
+      "valid_key": "m81"
+    },
+    {
+      "func": "CDLSHOOTINGSTAR",
+      "python_name": "cdlshootingstar",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v82",
+      "valid_key": "m82"
+    },
+    {
+      "func": "CDLSHORTLINE",
+      "python_name": "cdlshortline",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v83",
+      "valid_key": "m83"
+    },
+    {
+      "func": "CDLSPINNINGTOP",
+      "python_name": "cdlspinningtop",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v84",
+      "valid_key": "m84"
+    },
+    {
+      "func": "CDLSTALLEDPATTERN",
+      "python_name": "cdlstalledpattern",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v85",
+      "valid_key": "m85"
+    },
+    {
+      "func": "CDLSTICKSANDWICH",
+      "python_name": "cdlsticksandwich",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v86",
+      "valid_key": "m86"
+    },
+    {
+      "func": "CDLTAKURI",
+      "python_name": "cdltakuri",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v87",
+      "valid_key": "m87"
+    },
+    {
+      "func": "CDLTASUKIGAP",
+      "python_name": "cdltasukigap",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v88",
+      "valid_key": "m88"
+    },
+    {
+      "func": "CDLTHRUSTING",
+      "python_name": "cdlthrusting",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v89",
+      "valid_key": "m89"
+    },
+    {
+      "func": "CDLTRISTAR",
+      "python_name": "cdltristar",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v90",
+      "valid_key": "m90"
+    },
+    {
+      "func": "CDLUNIQUE3RIVER",
+      "python_name": "cdlunique3river",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v91",
+      "valid_key": "m91"
+    },
+    {
+      "func": "CDLUPSIDEGAP2CROWS",
+      "python_name": "cdlupsidegap2crows",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v92",
+      "valid_key": "m92"
+    },
+    {
+      "func": "CDLXSIDEGAP3METHODS",
+      "python_name": "cdlxsidegap3methods",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v93",
+      "valid_key": "m93"
+    },
+    {
+      "func": "CEIL",
+      "python_name": "ceil",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v94",
+      "valid_key": "m94"
+    },
+    {
+      "func": "CG",
+      "python_name": "cg",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v95",
+      "valid_key": "m95"
+    },
+    {
+      "func": "CHOP",
+      "python_name": "chop",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v96",
+      "valid_key": "m96"
+    },
+    {
+      "func": "CHOPTR",
+      "python_name": "choptr",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v97",
+      "valid_key": "m97"
+    },
+    {
+      "func": "CKSP",
+      "python_name": "cksp",
+      "case": "default",
+      "params": {},
+      "field": "high_stop",
+      "dtype": "float64",
+      "values_key": "v98",
+      "valid_key": "m98"
+    },
+    {
+      "func": "CKSP",
+      "python_name": "cksp",
+      "case": "default",
+      "params": {},
+      "field": "low_stop",
+      "dtype": "float64",
+      "values_key": "v99",
+      "valid_key": "m99"
+    },
+    {
+      "func": "CMF",
+      "python_name": "cmf",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v100",
+      "valid_key": "m100"
+    },
+    {
+      "func": "CMO",
+      "python_name": "cmo",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v101",
+      "valid_key": "m101"
+    },
+    {
+      "func": "CMOU",
+      "python_name": "cmou",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v102",
+      "valid_key": "m102"
+    },
+    {
+      "func": "COPPOCK",
+      "python_name": "coppock",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v103",
+      "valid_key": "m103"
+    },
+    {
+      "func": "CORREL",
+      "python_name": "correl",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v104",
+      "valid_key": "m104"
+    },
+    {
+      "func": "COS",
+      "python_name": "cos",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v105",
+      "valid_key": "m105"
+    },
+    {
+      "func": "COSH",
+      "python_name": "cosh",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v106",
+      "valid_key": "m106"
+    },
+    {
+      "func": "CRSI",
+      "python_name": "crsi",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v107",
+      "valid_key": "m107"
+    },
+    {
+      "func": "CTI",
+      "python_name": "cti",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v108",
+      "valid_key": "m108"
+    },
+    {
+      "func": "CUMSUM",
+      "python_name": "cumsum",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v109",
+      "valid_key": "m109"
+    },
+    {
+      "func": "CVI",
+      "python_name": "cvi",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v110",
+      "valid_key": "m110"
+    },
+    {
+      "func": "DEMA",
+      "python_name": "dema",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v111",
+      "valid_key": "m111"
+    },
+    {
+      "func": "DIV",
+      "python_name": "div",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v112",
+      "valid_key": "m112"
+    },
+    {
+      "func": "DONCHIAN",
+      "python_name": "donchian",
+      "case": "default",
+      "params": {},
+      "field": "upper_band",
+      "dtype": "float64",
+      "values_key": "v113",
+      "valid_key": "m113"
+    },
+    {
+      "func": "DONCHIAN",
+      "python_name": "donchian",
+      "case": "default",
+      "params": {},
+      "field": "middle_band",
+      "dtype": "float64",
+      "values_key": "v114",
+      "valid_key": "m114"
+    },
+    {
+      "func": "DONCHIAN",
+      "python_name": "donchian",
+      "case": "default",
+      "params": {},
+      "field": "lower_band",
+      "dtype": "float64",
+      "values_key": "v115",
+      "valid_key": "m115"
+    },
+    {
+      "func": "DOSC",
+      "python_name": "dosc",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v116",
+      "valid_key": "m116"
+    },
+    {
+      "func": "DPO",
+      "python_name": "dpo",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v117",
+      "valid_key": "m117"
+    },
+    {
+      "func": "DX",
+      "python_name": "dx",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v118",
+      "valid_key": "m118"
+    },
+    {
+      "func": "EFI",
+      "python_name": "efi",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v119",
+      "valid_key": "m119"
+    },
+    {
+      "func": "EMA",
+      "python_name": "ema",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v120",
+      "valid_key": "m120"
+    },
+    {
+      "func": "EMV",
+      "python_name": "emv",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v121",
+      "valid_key": "m121"
+    },
+    {
+      "func": "ER",
+      "python_name": "er",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v122",
+      "valid_key": "m122"
+    },
+    {
+      "func": "ERI",
+      "python_name": "eri",
+      "case": "default",
+      "params": {},
+      "field": "bull_power",
+      "dtype": "float64",
+      "values_key": "v123",
+      "valid_key": "m123"
+    },
+    {
+      "func": "ERI",
+      "python_name": "eri",
+      "case": "default",
+      "params": {},
+      "field": "bear_power",
+      "dtype": "float64",
+      "values_key": "v124",
+      "valid_key": "m124"
+    },
+    {
+      "func": "EXP",
+      "python_name": "exp",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v125",
+      "valid_key": "m125"
+    },
+    {
+      "func": "FISHER",
+      "python_name": "fisher",
+      "case": "default",
+      "params": {},
+      "field": "fisher",
+      "dtype": "float64",
+      "values_key": "v126",
+      "valid_key": "m126"
+    },
+    {
+      "func": "FISHER",
+      "python_name": "fisher",
+      "case": "default",
+      "params": {},
+      "field": "trigger",
+      "dtype": "float64",
+      "values_key": "v127",
+      "valid_key": "m127"
+    },
+    {
+      "func": "FLOOR",
+      "python_name": "floor",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v128",
+      "valid_key": "m128"
+    },
+    {
+      "func": "FOSC",
+      "python_name": "fosc",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v129",
+      "valid_key": "m129"
+    },
+    {
+      "func": "FRACTAL",
+      "python_name": "fractal",
+      "case": "default",
+      "params": {},
+      "field": "swing_high",
+      "dtype": "int32",
+      "values_key": "v130",
+      "valid_key": "m130"
+    },
+    {
+      "func": "FRACTAL",
+      "python_name": "fractal",
+      "case": "default",
+      "params": {},
+      "field": "swing_low",
+      "dtype": "int32",
+      "values_key": "v131",
+      "valid_key": "m131"
+    },
+    {
+      "func": "FRAMA",
+      "python_name": "frama",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v132",
+      "valid_key": "m132"
+    },
+    {
+      "func": "HA",
+      "python_name": "ha",
+      "case": "default",
+      "params": {},
+      "field": "ha_open",
+      "dtype": "float64",
+      "values_key": "v133",
+      "valid_key": "m133"
+    },
+    {
+      "func": "HA",
+      "python_name": "ha",
+      "case": "default",
+      "params": {},
+      "field": "ha_high",
+      "dtype": "float64",
+      "values_key": "v134",
+      "valid_key": "m134"
+    },
+    {
+      "func": "HA",
+      "python_name": "ha",
+      "case": "default",
+      "params": {},
+      "field": "ha_low",
+      "dtype": "float64",
+      "values_key": "v135",
+      "valid_key": "m135"
+    },
+    {
+      "func": "HA",
+      "python_name": "ha",
+      "case": "default",
+      "params": {},
+      "field": "ha_close",
+      "dtype": "float64",
+      "values_key": "v136",
+      "valid_key": "m136"
+    },
+    {
+      "func": "HMA",
+      "python_name": "hma",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v137",
+      "valid_key": "m137"
+    },
+    {
+      "func": "HT_DCPERIOD",
+      "python_name": "ht_dcperiod",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v138",
+      "valid_key": "m138"
+    },
+    {
+      "func": "HT_DCPHASE",
+      "python_name": "ht_dcphase",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v139",
+      "valid_key": "m139"
+    },
+    {
+      "func": "HT_PHASOR",
+      "python_name": "ht_phasor",
+      "case": "default",
+      "params": {},
+      "field": "in_phase",
+      "dtype": "float64",
+      "values_key": "v140",
+      "valid_key": "m140"
+    },
+    {
+      "func": "HT_PHASOR",
+      "python_name": "ht_phasor",
+      "case": "default",
+      "params": {},
+      "field": "quadrature",
+      "dtype": "float64",
+      "values_key": "v141",
+      "valid_key": "m141"
+    },
+    {
+      "func": "HT_SINE",
+      "python_name": "ht_sine",
+      "case": "default",
+      "params": {},
+      "field": "sine",
+      "dtype": "float64",
+      "values_key": "v142",
+      "valid_key": "m142"
+    },
+    {
+      "func": "HT_SINE",
+      "python_name": "ht_sine",
+      "case": "default",
+      "params": {},
+      "field": "lead_sine",
+      "dtype": "float64",
+      "values_key": "v143",
+      "valid_key": "m143"
+    },
+    {
+      "func": "HT_TRENDLINE",
+      "python_name": "ht_trendline",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v144",
+      "valid_key": "m144"
+    },
+    {
+      "func": "HT_TRENDMODE",
+      "python_name": "ht_trendmode",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v145",
+      "valid_key": "m145"
+    },
+    {
+      "func": "IBS",
+      "python_name": "ibs",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v146",
+      "valid_key": "m146"
+    },
+    {
+      "func": "ICHIMOKU",
+      "python_name": "ichimoku",
+      "case": "default",
+      "params": {},
+      "field": "tenkan_sen",
+      "dtype": "float64",
+      "values_key": "v147",
+      "valid_key": "m147"
+    },
+    {
+      "func": "ICHIMOKU",
+      "python_name": "ichimoku",
+      "case": "default",
+      "params": {},
+      "field": "kijun_sen",
+      "dtype": "float64",
+      "values_key": "v148",
+      "valid_key": "m148"
+    },
+    {
+      "func": "ICHIMOKU",
+      "python_name": "ichimoku",
+      "case": "default",
+      "params": {},
+      "field": "senkou_span_a",
+      "dtype": "float64",
+      "values_key": "v149",
+      "valid_key": "m149"
+    },
+    {
+      "func": "ICHIMOKU",
+      "python_name": "ichimoku",
+      "case": "default",
+      "params": {},
+      "field": "senkou_span_b",
+      "dtype": "float64",
+      "values_key": "v150",
+      "valid_key": "m150"
+    },
+    {
+      "func": "IMI",
+      "python_name": "imi",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v151",
+      "valid_key": "m151"
+    },
+    {
+      "func": "KAMA",
+      "python_name": "kama",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v152",
+      "valid_key": "m152"
+    },
+    {
+      "func": "KC",
+      "python_name": "kc",
+      "case": "default",
+      "params": {},
+      "field": "upper_band",
+      "dtype": "float64",
+      "values_key": "v153",
+      "valid_key": "m153"
+    },
+    {
+      "func": "KC",
+      "python_name": "kc",
+      "case": "default",
+      "params": {},
+      "field": "middle_band",
+      "dtype": "float64",
+      "values_key": "v154",
+      "valid_key": "m154"
+    },
+    {
+      "func": "KC",
+      "python_name": "kc",
+      "case": "default",
+      "params": {},
+      "field": "lower_band",
+      "dtype": "float64",
+      "values_key": "v155",
+      "valid_key": "m155"
+    },
+    {
+      "func": "KDJ",
+      "python_name": "kdj",
+      "case": "default",
+      "params": {},
+      "field": "k",
+      "dtype": "float64",
+      "values_key": "v156",
+      "valid_key": "m156"
+    },
+    {
+      "func": "KDJ",
+      "python_name": "kdj",
+      "case": "default",
+      "params": {},
+      "field": "d",
+      "dtype": "float64",
+      "values_key": "v157",
+      "valid_key": "m157"
+    },
+    {
+      "func": "KDJ",
+      "python_name": "kdj",
+      "case": "default",
+      "params": {},
+      "field": "j",
+      "dtype": "float64",
+      "values_key": "v158",
+      "valid_key": "m158"
+    },
+    {
+      "func": "KST",
+      "python_name": "kst",
+      "case": "default",
+      "params": {},
+      "field": "kst",
+      "dtype": "float64",
+      "values_key": "v159",
+      "valid_key": "m159"
+    },
+    {
+      "func": "KST",
+      "python_name": "kst",
+      "case": "default",
+      "params": {},
+      "field": "kst_signal",
+      "dtype": "float64",
+      "values_key": "v160",
+      "valid_key": "m160"
+    },
+    {
+      "func": "KSTEXT",
+      "python_name": "kstext",
+      "case": "default",
+      "params": {},
+      "field": "kst",
+      "dtype": "float64",
+      "values_key": "v161",
+      "valid_key": "m161"
+    },
+    {
+      "func": "KSTEXT",
+      "python_name": "kstext",
+      "case": "default",
+      "params": {},
+      "field": "kst_signal",
+      "dtype": "float64",
+      "values_key": "v162",
+      "valid_key": "m162"
+    },
+    {
+      "func": "KURTOSIS",
+      "python_name": "kurtosis",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v163",
+      "valid_key": "m163"
+    },
+    {
+      "func": "KVO",
+      "python_name": "kvo",
+      "case": "default",
+      "params": {},
+      "field": "kvo",
+      "dtype": "float64",
+      "values_key": "v164",
+      "valid_key": "m164"
+    },
+    {
+      "func": "KVO",
+      "python_name": "kvo",
+      "case": "default",
+      "params": {},
+      "field": "kvo_signal",
+      "dtype": "float64",
+      "values_key": "v165",
+      "valid_key": "m165"
+    },
+    {
+      "func": "LINEARREG",
+      "python_name": "linearreg",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v166",
+      "valid_key": "m166"
+    },
+    {
+      "func": "LINEARREG_ANGLE",
+      "python_name": "linearreg_angle",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v167",
+      "valid_key": "m167"
+    },
+    {
+      "func": "LINEARREG_INTERCEPT",
+      "python_name": "linearreg_intercept",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v168",
+      "valid_key": "m168"
+    },
+    {
+      "func": "LINEARREG_SLOPE",
+      "python_name": "linearreg_slope",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v169",
+      "valid_key": "m169"
+    },
+    {
+      "func": "LN",
+      "python_name": "ln",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v170",
+      "valid_key": "m170"
+    },
+    {
+      "func": "LOG10",
+      "python_name": "log10",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v171",
+      "valid_key": "m171"
+    },
+    {
+      "func": "MA",
+      "python_name": "ma",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v172",
+      "valid_key": "m172"
+    },
+    {
+      "func": "MACD",
+      "python_name": "macd",
+      "case": "default",
+      "params": {},
+      "field": "macd",
+      "dtype": "float64",
+      "values_key": "v173",
+      "valid_key": "m173"
+    },
+    {
+      "func": "MACD",
+      "python_name": "macd",
+      "case": "default",
+      "params": {},
+      "field": "macd_signal",
+      "dtype": "float64",
+      "values_key": "v174",
+      "valid_key": "m174"
+    },
+    {
+      "func": "MACD",
+      "python_name": "macd",
+      "case": "default",
+      "params": {},
+      "field": "macd_hist",
+      "dtype": "float64",
+      "values_key": "v175",
+      "valid_key": "m175"
+    },
+    {
+      "func": "MACD",
+      "python_name": "macd",
+      "case": "macd_5_10_3",
+      "params": {
+        "fast_period": 5,
+        "slow_period": 10,
+        "signal_period": 3
+      },
+      "field": "macd",
+      "dtype": "float64",
+      "values_key": "v176",
+      "valid_key": "m176"
+    },
+    {
+      "func": "MACD",
+      "python_name": "macd",
+      "case": "macd_5_10_3",
+      "params": {
+        "fast_period": 5,
+        "slow_period": 10,
+        "signal_period": 3
+      },
+      "field": "macd_signal",
+      "dtype": "float64",
+      "values_key": "v177",
+      "valid_key": "m177"
+    },
+    {
+      "func": "MACD",
+      "python_name": "macd",
+      "case": "macd_5_10_3",
+      "params": {
+        "fast_period": 5,
+        "slow_period": 10,
+        "signal_period": 3
+      },
+      "field": "macd_hist",
+      "dtype": "float64",
+      "values_key": "v178",
+      "valid_key": "m178"
+    },
+    {
+      "func": "MACDEXT",
+      "python_name": "macdext",
+      "case": "default",
+      "params": {},
+      "field": "macd",
+      "dtype": "float64",
+      "values_key": "v179",
+      "valid_key": "m179"
+    },
+    {
+      "func": "MACDEXT",
+      "python_name": "macdext",
+      "case": "default",
+      "params": {},
+      "field": "macd_signal",
+      "dtype": "float64",
+      "values_key": "v180",
+      "valid_key": "m180"
+    },
+    {
+      "func": "MACDEXT",
+      "python_name": "macdext",
+      "case": "default",
+      "params": {},
+      "field": "macd_hist",
+      "dtype": "float64",
+      "values_key": "v181",
+      "valid_key": "m181"
+    },
+    {
+      "func": "MACDFIX",
+      "python_name": "macdfix",
+      "case": "default",
+      "params": {},
+      "field": "macd",
+      "dtype": "float64",
+      "values_key": "v182",
+      "valid_key": "m182"
+    },
+    {
+      "func": "MACDFIX",
+      "python_name": "macdfix",
+      "case": "default",
+      "params": {},
+      "field": "macd_signal",
+      "dtype": "float64",
+      "values_key": "v183",
+      "valid_key": "m183"
+    },
+    {
+      "func": "MACDFIX",
+      "python_name": "macdfix",
+      "case": "default",
+      "params": {},
+      "field": "macd_hist",
+      "dtype": "float64",
+      "values_key": "v184",
+      "valid_key": "m184"
+    },
+    {
+      "func": "MAMA",
+      "python_name": "mama",
+      "case": "default",
+      "params": {},
+      "field": "mama",
+      "dtype": "float64",
+      "values_key": "v185",
+      "valid_key": "m185"
+    },
+    {
+      "func": "MAMA",
+      "python_name": "mama",
+      "case": "default",
+      "params": {},
+      "field": "fama",
+      "dtype": "float64",
+      "values_key": "v186",
+      "valid_key": "m186"
+    },
+    {
+      "func": "MARKETFI",
+      "python_name": "marketfi",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v187",
+      "valid_key": "m187"
+    },
+    {
+      "func": "MASSI",
+      "python_name": "massi",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v188",
+      "valid_key": "m188"
+    },
+    {
+      "func": "MAVP",
+      "python_name": "mavp",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v189",
+      "valid_key": "m189"
+    },
+    {
+      "func": "MAX",
+      "python_name": "max",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v190",
+      "valid_key": "m190"
+    },
+    {
+      "func": "MAXINDEX",
+      "python_name": "maxindex",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v191",
+      "valid_key": "m191"
+    },
+    {
+      "func": "MCGD",
+      "python_name": "mcgd",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v192",
+      "valid_key": "m192"
+    },
+    {
+      "func": "MEDIAN",
+      "python_name": "median",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v193",
+      "valid_key": "m193"
+    },
+    {
+      "func": "MEDPRICE",
+      "python_name": "medprice",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v194",
+      "valid_key": "m194"
+    },
+    {
+      "func": "MFI",
+      "python_name": "mfi",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v195",
+      "valid_key": "m195"
+    },
+    {
+      "func": "MIDPOINT",
+      "python_name": "midpoint",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v196",
+      "valid_key": "m196"
+    },
+    {
+      "func": "MIDPRICE",
+      "python_name": "midprice",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v197",
+      "valid_key": "m197"
+    },
+    {
+      "func": "MIN",
+      "python_name": "min",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v198",
+      "valid_key": "m198"
+    },
+    {
+      "func": "MININDEX",
+      "python_name": "minindex",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "int32",
+      "values_key": "v199",
+      "valid_key": "m199"
+    },
+    {
+      "func": "MINMAX",
+      "python_name": "minmax",
+      "case": "default",
+      "params": {},
+      "field": "min",
+      "dtype": "float64",
+      "values_key": "v200",
+      "valid_key": "m200"
+    },
+    {
+      "func": "MINMAX",
+      "python_name": "minmax",
+      "case": "default",
+      "params": {},
+      "field": "max",
+      "dtype": "float64",
+      "values_key": "v201",
+      "valid_key": "m201"
+    },
+    {
+      "func": "MINMAXINDEX",
+      "python_name": "minmaxindex",
+      "case": "default",
+      "params": {},
+      "field": "min_idx",
+      "dtype": "int32",
+      "values_key": "v202",
+      "valid_key": "m202"
+    },
+    {
+      "func": "MINMAXINDEX",
+      "python_name": "minmaxindex",
+      "case": "default",
+      "params": {},
+      "field": "max_idx",
+      "dtype": "int32",
+      "values_key": "v203",
+      "valid_key": "m203"
+    },
+    {
+      "func": "MINUS_DI",
+      "python_name": "minus_di",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v204",
+      "valid_key": "m204"
+    },
+    {
+      "func": "MINUS_DM",
+      "python_name": "minus_dm",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v205",
+      "valid_key": "m205"
+    },
+    {
+      "func": "MOM",
+      "python_name": "mom",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v206",
+      "valid_key": "m206"
+    },
+    {
+      "func": "MULT",
+      "python_name": "mult",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v207",
+      "valid_key": "m207"
+    },
+    {
+      "func": "NATR",
+      "python_name": "natr",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v208",
+      "valid_key": "m208"
+    },
+    {
+      "func": "NVI",
+      "python_name": "nvi",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v209",
+      "valid_key": "m209"
+    },
+    {
+      "func": "OBV",
+      "python_name": "obv",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v210",
+      "valid_key": "m210"
+    },
+    {
+      "func": "PERCENTB",
+      "python_name": "percentb",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v211",
+      "valid_key": "m211"
+    },
+    {
+      "func": "PERCENTILE",
+      "python_name": "percentile",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v212",
+      "valid_key": "m212"
+    },
+    {
+      "func": "PERCENTRANK",
+      "python_name": "percentrank",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v213",
+      "valid_key": "m213"
+    },
+    {
+      "func": "PLUS_DI",
+      "python_name": "plus_di",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v214",
+      "valid_key": "m214"
+    },
+    {
+      "func": "PLUS_DM",
+      "python_name": "plus_dm",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v215",
+      "valid_key": "m215"
+    },
+    {
+      "func": "PPO",
+      "python_name": "ppo",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v216",
+      "valid_key": "m216"
+    },
+    {
+      "func": "PSO",
+      "python_name": "pso",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v217",
+      "valid_key": "m217"
+    },
+    {
+      "func": "PVI",
+      "python_name": "pvi",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v218",
+      "valid_key": "m218"
+    },
+    {
+      "func": "PVO",
+      "python_name": "pvo",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v219",
+      "valid_key": "m219"
+    },
+    {
+      "func": "PVT",
+      "python_name": "pvt",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v220",
+      "valid_key": "m220"
+    },
+    {
+      "func": "QSTICK",
+      "python_name": "qstick",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v221",
+      "valid_key": "m221"
+    },
+    {
+      "func": "RMA",
+      "python_name": "rma",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v222",
+      "valid_key": "m222"
+    },
+    {
+      "func": "ROC",
+      "python_name": "roc",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v223",
+      "valid_key": "m223"
+    },
+    {
+      "func": "ROCP",
+      "python_name": "rocp",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v224",
+      "valid_key": "m224"
+    },
+    {
+      "func": "ROCR",
+      "python_name": "rocr",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v225",
+      "valid_key": "m225"
+    },
+    {
+      "func": "ROCR100",
+      "python_name": "rocr100",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v226",
+      "valid_key": "m226"
+    },
+    {
+      "func": "ROGERSSATCHELL",
+      "python_name": "rogerssatchell",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v227",
+      "valid_key": "m227"
+    },
+    {
+      "func": "RSI",
+      "python_name": "rsi",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v228",
+      "valid_key": "m228"
+    },
+    {
+      "func": "RVI",
+      "python_name": "rvi",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v229",
+      "valid_key": "m229"
+    },
+    {
+      "func": "RVIR",
+      "python_name": "rvir",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v230",
+      "valid_key": "m230"
+    },
+    {
+      "func": "RVOL",
+      "python_name": "rvol",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v231",
+      "valid_key": "m231"
+    },
+    {
+      "func": "SAR",
+      "python_name": "sar",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v232",
+      "valid_key": "m232"
+    },
+    {
+      "func": "SAREXT",
+      "python_name": "sarext",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v233",
+      "valid_key": "m233"
+    },
+    {
+      "func": "SI",
+      "python_name": "si",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v234",
+      "valid_key": "m234"
+    },
+    {
+      "func": "SIN",
+      "python_name": "sin",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v235",
+      "valid_key": "m235"
+    },
+    {
+      "func": "SINH",
+      "python_name": "sinh",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v236",
+      "valid_key": "m236"
+    },
+    {
+      "func": "SMA",
+      "python_name": "sma",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v237",
+      "valid_key": "m237"
+    },
+    {
+      "func": "SMA",
+      "python_name": "sma",
+      "case": "sma_10",
+      "params": {
+        "time_period": 10
+      },
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v238",
+      "valid_key": "m238"
+    },
+    {
+      "func": "SMI",
+      "python_name": "smi",
+      "case": "default",
+      "params": {},
+      "field": "smi",
+      "dtype": "float64",
+      "values_key": "v239",
+      "valid_key": "m239"
+    },
+    {
+      "func": "SMI",
+      "python_name": "smi",
+      "case": "default",
+      "params": {},
+      "field": "smi_signal",
+      "dtype": "float64",
+      "values_key": "v240",
+      "valid_key": "m240"
+    },
+    {
+      "func": "SQRT",
+      "python_name": "sqrt",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v241",
+      "valid_key": "m241"
+    },
+    {
+      "func": "SQZMOM",
+      "python_name": "sqzmom",
+      "case": "default",
+      "params": {},
+      "field": "momentum",
+      "dtype": "float64",
+      "values_key": "v242",
+      "valid_key": "m242"
+    },
+    {
+      "func": "SQZMOM",
+      "python_name": "sqzmom",
+      "case": "default",
+      "params": {},
+      "field": "squeeze",
+      "dtype": "int32",
+      "values_key": "v243",
+      "valid_key": "m243"
+    },
+    {
+      "func": "STC",
+      "python_name": "stc",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v244",
+      "valid_key": "m244"
+    },
+    {
+      "func": "STDDEV",
+      "python_name": "stddev",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v245",
+      "valid_key": "m245"
+    },
+    {
+      "func": "STOCH",
+      "python_name": "stoch",
+      "case": "default",
+      "params": {},
+      "field": "slow_k",
+      "dtype": "float64",
+      "values_key": "v246",
+      "valid_key": "m246"
+    },
+    {
+      "func": "STOCH",
+      "python_name": "stoch",
+      "case": "default",
+      "params": {},
+      "field": "slow_d",
+      "dtype": "float64",
+      "values_key": "v247",
+      "valid_key": "m247"
+    },
+    {
+      "func": "STOCH",
+      "python_name": "stoch",
+      "case": "stoch_5_3",
+      "params": {
+        "fast_k_period": 5,
+        "slow_k_period": 3,
+        "slow_k_ma_type": 0,
+        "slow_d_period": 3,
+        "slow_d_ma_type": 0
+      },
+      "field": "slow_k",
+      "dtype": "float64",
+      "values_key": "v248",
+      "valid_key": "m248"
+    },
+    {
+      "func": "STOCH",
+      "python_name": "stoch",
+      "case": "stoch_5_3",
+      "params": {
+        "fast_k_period": 5,
+        "slow_k_period": 3,
+        "slow_k_ma_type": 0,
+        "slow_d_period": 3,
+        "slow_d_ma_type": 0
+      },
+      "field": "slow_d",
+      "dtype": "float64",
+      "values_key": "v249",
+      "valid_key": "m249"
+    },
+    {
+      "func": "STOCHF",
+      "python_name": "stochf",
+      "case": "default",
+      "params": {},
+      "field": "fast_k",
+      "dtype": "float64",
+      "values_key": "v250",
+      "valid_key": "m250"
+    },
+    {
+      "func": "STOCHF",
+      "python_name": "stochf",
+      "case": "default",
+      "params": {},
+      "field": "fast_d",
+      "dtype": "float64",
+      "values_key": "v251",
+      "valid_key": "m251"
+    },
+    {
+      "func": "STOCHRSI",
+      "python_name": "stochrsi",
+      "case": "default",
+      "params": {},
+      "field": "fast_k",
+      "dtype": "float64",
+      "values_key": "v252",
+      "valid_key": "m252"
+    },
+    {
+      "func": "STOCHRSI",
+      "python_name": "stochrsi",
+      "case": "default",
+      "params": {},
+      "field": "fast_d",
+      "dtype": "float64",
+      "values_key": "v253",
+      "valid_key": "m253"
+    },
+    {
+      "func": "SUB",
+      "python_name": "sub",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v254",
+      "valid_key": "m254"
+    },
+    {
+      "func": "SUM",
+      "python_name": "sum",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v255",
+      "valid_key": "m255"
+    },
+    {
+      "func": "SUPERTREND",
+      "python_name": "supertrend",
+      "case": "default",
+      "params": {},
+      "field": "supertrend",
+      "dtype": "float64",
+      "values_key": "v256",
+      "valid_key": "m256"
+    },
+    {
+      "func": "SUPERTREND",
+      "python_name": "supertrend",
+      "case": "default",
+      "params": {},
+      "field": "trend",
+      "dtype": "int32",
+      "values_key": "v257",
+      "valid_key": "m257"
+    },
+    {
+      "func": "SWAK_2PHP",
+      "python_name": "swak_2php",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v258",
+      "valid_key": "m258"
+    },
+    {
+      "func": "SWAK_BP",
+      "python_name": "swak_bp",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v259",
+      "valid_key": "m259"
+    },
+    {
+      "func": "SWAK_BUTTER",
+      "python_name": "swak_butter",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v260",
+      "valid_key": "m260"
+    },
+    {
+      "func": "SWAK_GAUSS",
+      "python_name": "swak_gauss",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v261",
+      "valid_key": "m261"
+    },
+    {
+      "func": "SWAK_HP",
+      "python_name": "swak_hp",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v262",
+      "valid_key": "m262"
+    },
+    {
+      "func": "T3",
+      "python_name": "t3",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v263",
+      "valid_key": "m263"
+    },
+    {
+      "func": "TAN",
+      "python_name": "tan",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v264",
+      "valid_key": "m264"
+    },
+    {
+      "func": "TANH",
+      "python_name": "tanh",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v265",
+      "valid_key": "m265"
+    },
+    {
+      "func": "TEMA",
+      "python_name": "tema",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v266",
+      "valid_key": "m266"
+    },
+    {
+      "func": "TRANGE",
+      "python_name": "trange",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v267",
+      "valid_key": "m267"
+    },
+    {
+      "func": "TRIMA",
+      "python_name": "trima",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v268",
+      "valid_key": "m268"
+    },
+    {
+      "func": "TRIX",
+      "python_name": "trix",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v269",
+      "valid_key": "m269"
+    },
+    {
+      "func": "TSF",
+      "python_name": "tsf",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v270",
+      "valid_key": "m270"
+    },
+    {
+      "func": "TSI",
+      "python_name": "tsi",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v271",
+      "valid_key": "m271"
+    },
+    {
+      "func": "TYPPRICE",
+      "python_name": "typprice",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v272",
+      "valid_key": "m272"
+    },
+    {
+      "func": "ULTOSC",
+      "python_name": "ultosc",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v273",
+      "valid_key": "m273"
+    },
+    {
+      "func": "VAR",
+      "python_name": "var",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v274",
+      "valid_key": "m274"
+    },
+    {
+      "func": "VHF",
+      "python_name": "vhf",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v275",
+      "valid_key": "m275"
+    },
+    {
+      "func": "VIDYA",
+      "python_name": "vidya",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v276",
+      "valid_key": "m276"
+    },
+    {
+      "func": "VORTEX",
+      "python_name": "vortex",
+      "case": "default",
+      "params": {},
+      "field": "plus_vi",
+      "dtype": "float64",
+      "values_key": "v277",
+      "valid_key": "m277"
+    },
+    {
+      "func": "VORTEX",
+      "python_name": "vortex",
+      "case": "default",
+      "params": {},
+      "field": "minus_vi",
+      "dtype": "float64",
+      "values_key": "v278",
+      "valid_key": "m278"
+    },
+    {
+      "func": "VWAP",
+      "python_name": "vwap",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v279",
+      "valid_key": "m279"
+    },
+    {
+      "func": "VWMA",
+      "python_name": "vwma",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v280",
+      "valid_key": "m280"
+    },
+    {
+      "func": "WAD",
+      "python_name": "wad",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v281",
+      "valid_key": "m281"
+    },
+    {
+      "func": "WAVETREND",
+      "python_name": "wavetrend",
+      "case": "default",
+      "params": {},
+      "field": "wt1",
+      "dtype": "float64",
+      "values_key": "v282",
+      "valid_key": "m282"
+    },
+    {
+      "func": "WAVETREND",
+      "python_name": "wavetrend",
+      "case": "default",
+      "params": {},
+      "field": "wt2",
+      "dtype": "float64",
+      "values_key": "v283",
+      "valid_key": "m283"
+    },
+    {
+      "func": "WCLPRICE",
+      "python_name": "wclprice",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v284",
+      "valid_key": "m284"
+    },
+    {
+      "func": "WILLR",
+      "python_name": "willr",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v285",
+      "valid_key": "m285"
+    },
+    {
+      "func": "WMA",
+      "python_name": "wma",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v286",
+      "valid_key": "m286"
+    },
+    {
+      "func": "ZIGZAG",
+      "python_name": "zigzag",
+      "case": "default",
+      "params": {},
+      "field": "zig_zag",
+      "dtype": "float64",
+      "values_key": "v287",
+      "valid_key": "m287"
+    },
+    {
+      "func": "ZIGZAG",
+      "python_name": "zigzag",
+      "case": "default",
+      "params": {},
+      "field": "trend",
+      "dtype": "int32",
+      "values_key": "v288",
+      "valid_key": "m288"
+    },
+    {
+      "func": "ZIGZAG",
+      "python_name": "zigzag",
+      "case": "default",
+      "params": {},
+      "field": "pivot_idx",
+      "dtype": "int32",
+      "values_key": "v289",
+      "valid_key": "m289"
+    },
+    {
+      "func": "ZLEMA",
+      "python_name": "zlema",
+      "case": "default",
+      "params": {},
+      "field": "out",
+      "dtype": "float64",
+      "values_key": "v290",
+      "valid_key": "m290"
+    }
+  ]
+}

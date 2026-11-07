@@ -6,7 +6,7 @@ Thanks for helping improve `polars_ta_lib`.
 
 ```bash
 uv venv
-uv pip install maturin pytest numpy "polars>=2.1,<3" "polars-talib-fast==2.0.0"
+uv pip install maturin pytest numpy "polars>=2.1,<3"
 uv run maturin develop --uv
 ```
 
@@ -21,9 +21,9 @@ cargo fmt --check
 cargo clippy --all-targets -- -D warnings
 ```
 
-The test suite checks all 237 functions against `polars-talib-fast==2.0.0` on
-dense finite data, plus grouping, empty/short inputs, multi-chunk inputs, and
-the strict null/NaN/Inf contract.
+The test suite checks all 237 functions against committed golden regression
+fixtures, plus grouping, empty/short inputs, multi-chunk inputs, and the strict
+null/NaN/Inf contract.
 
 ## Documentation
 
