@@ -1,0 +1,17 @@
+polars_ta_lib
+=============
+
+This project is MIT-licensed.
+
+TA-Lib
+------
+The indicator definitions and the Rust backend come from TA-Lib:
+https://ta-lib.org
+
+The `ta-lib` Rust crate is distributed under the BSD-3-Clause license.
+The full text is in LICENSES/TA-Lib.txt.
+
+polars-talib-fast
+-----------------
+`polars-talib-fast` is a test-only dependency used as a numerical oracle.
+It is MIT-licensed and is not bundled with this package.

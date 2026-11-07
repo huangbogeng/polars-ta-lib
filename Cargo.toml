@@ -1,0 +1,31 @@
+[package]
+name = "polars_ta_lib"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95"
+description = "TA-Lib indicators as Polars expression plugins"
+license = "MIT"
+repository = "https://github.com/huangbogeng/polars-ta-lib"
+
+[lib]
+name = "polars_ta_lib"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.29", features = ["extension-module", "abi3-py310"] }
+pyo3-polars = { version = "0.28", features = ["derive", "dtype-struct"] }
+polars = { version = "0.55.2", default-features = false, features = ["dtype-struct"] }
+polars-arrow = { version = "0.55.2", default-features = false }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Official pure-Rust TA-Lib port. Exact pin: the test oracle is built on the same version.
+ta-lib = "=0.8.3"
+
+[profile.release]
+codegen-units = 1
+lto = "fat"
+strip = true
+
+[profile.dev.package."*"]
+opt-level = 2

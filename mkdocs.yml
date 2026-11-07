@@ -1,0 +1,31 @@
+site_name: polars_ta_lib
+site_description: TA-Lib indicators as Polars expression plugins
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - content.code.copy
+nav:
+  - Home: index.md
+  - API Reference:
+      - Overview: api/index.md
+      - Cycle Indicators: api/cycle-indicators.md
+      - Math Operators: api/math-operators.md
+      - Math Transform: api/math-transform.md
+      - Momentum Indicators: api/momentum-indicators.md
+      - Overlap Studies: api/overlap-studies.md
+      - Pattern Recognition: api/pattern-recognition.md
+      - Price Transform: api/price-transform.md
+      - Statistic Functions: api/statistic-functions.md
+      - Volatility Indicators: api/volatility-indicators.md
+      - Volume Indicators: api/volume-indicators.md
+  - Architecture: architecture.md
+  - Implementation Plan: plan.md
+markdown_extensions:
+  - admonition
+  - tables
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format

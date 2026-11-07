@@ -1,0 +1,37 @@
+[build-system]
+requires = ["maturin>=1.5,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "polars_ta_lib"
+description = "TA-Lib indicators as Polars expression plugins"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE", "NOTICE", "LICENSES/TA-Lib.txt"]
+dynamic = ["version"]
+dependencies = ["polars>=2.0,<3"]
+classifiers = [
+  "Programming Language :: Rust",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+
+[tool.maturin]
+python-source = "python"
+module-name = "polars_ta_lib._internal"
+features = ["pyo3/extension-module"]
+
+[dependency-groups]
+dev = [
+  "maturin>=1.5,<2.0",
+  "pytest>=8",
+  "numpy>=1.26",
+  "polars-talib-fast==2.0.0",
+]
+docs = [
+  "mkdocs>=1.6,<2",
+  "mkdocs-material>=9.5",
+]
