@@ -16,7 +16,7 @@
 - M3 插件边界：完成；N1、Struct、Int32、空/短序列、多 chunk 均验收。
 - M4 Python API：完成；237 个顶层函数、签名、docstring、`.pyi`、`FUNCS`。
 - M5 测试：24 个 pytest 通过；237 函数与 `polars-talib-fast==2.0.0` 在稠密有限数据上数值一致；参数、分组、边界、错误路径已覆盖。兼容性已验证：Polars 2.1.0 / Python 3.11、Polars 2.1.0 / Python 3.12。性能 smoke（dev build，1M 行）：SMA 28.7 ms、EMA 19.9 ms、RSI 21.6 ms、ATR 54.8 ms、MACD 27.3 ms（非硬阈值）。
-- M6 打包：README、LICENSE、NOTICE、CI 工作流已加入；包名统一为 `polars_ta_lib`（PyPI 未占用；`polars_ta` import 与已有 `polars-ta` 冲突已消除）；release wheel 已按新包名重建并在全新 venv 中安装验证（24 tests 通过）；MkDocs 文档已从该 wheel 生成并通过 `mkdocs build --strict`；CI 三平台实跑待验证。
+- M6 打包：README、LICENSE、NOTICE、CI 工作流已加入；包名统一为 `polars_ta_lib`（PyPI 未占用；`polars_ta` import 与已有 `polars-ta` 冲突已消除）；release wheel 为 `cp311-abi3`（Python 3.11+，Polars 2.1+），已在 Python 3.11/3.12 + Polars 2.1.0 下验证（24 tests 通过）；MkDocs 文档已生成并通过 `mkdocs build --strict`；CI 已通过：Linux push/PR，macOS/Windows tag/manual。
 
 ## 2. 里程碑
 
