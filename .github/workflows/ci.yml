@@ -3,6 +3,7 @@ name: CI
 on:
   push:
     branches: [main]
+    tags: ["v*"]
   pull_request:
   workflow_dispatch:
 
@@ -14,100 +15,76 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  linux:
+    # Main pushes, PRs, and manual runs. Tag pushes use the OS jobs.
+    if: github.event_name != 'push' || startsWith(github.ref, 'refs/heads/')
+    runs-on: ubuntu-latest
     timeout-minutes: 30
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: ubuntu-latest
-            python-version: "3.10"
-            polars-version: "1.44.2"
-          - os: ubuntu-latest
-            python-version: "3.10"
-            polars-version: "2.0.0"
-          - os: ubuntu-latest
-            python-version: "3.12"
-            polars-version: "2.1.0"
-          - os: macos-latest
-            python-version: "3.10"
-            polars-version: "2.0.0"
-          - os: windows-latest
-            python-version: "3.10"
-            polars-version: "2.0.0"
-    runs-on: ${{ matrix.os }}
-    name: ${{ matrix.os }} / py${{ matrix.python-version }} / polars${{ matrix.polars-version }}
 
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: pyproject.toml
 
       - uses: dtolnay/rust-toolchain@1.95.0
         with:
           components: rustfmt, clippy
 
-      - uses: astral-sh/setup-uv@v5
-        with:
-          enable-cache: true
-
       - uses: Swatinem/rust-cache@v2
-        with:
-          shared-key: polars-ta-lib
 
-      - name: Create environment
-        shell: bash
-        run: uv venv --python ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: pip install maturin pytest numpy "polars==2.1.0" "polars-talib-fast==2.0.0"
 
-      - name: Install test dependencies
-        shell: bash
-        run: |
-          if [ "$RUNNER_OS" = "Windows" ]; then
-            PY=.venv/Scripts/python.exe
-          else
-            PY=.venv/bin/python
-          fi
-          uv pip install --python "$PY" maturin pytest numpy "polars==${{ matrix.polars-version }}" "polars-talib-fast==2.0.0"
-
-      - name: Build extension
-        shell: bash
-        run: |
-          if [ "$RUNNER_OS" = "Windows" ]; then
-            PY=.venv/Scripts/python.exe
-          else
-            PY=.venv/bin/python
-          fi
-          VIRTUAL_ENV=.venv "$PY" -m maturin develop --uv
+      - name: Install package
+        run: pip install -e . --no-build-isolation
 
       - name: Test
-        shell: bash
-        run: |
-          if [ "$RUNNER_OS" = "Windows" ]; then
-            PY=.venv/Scripts/python.exe
-          else
-            PY=.venv/bin/python
-          fi
-          "$PY" -m pytest -q
-
-      - name: Build documentation
-        if: matrix.os == 'ubuntu-latest' && matrix.polars-version == '2.0.0'
-        shell: bash
-        run: |
-          if [ "$RUNNER_OS" = "Windows" ]; then
-            PY=.venv/Scripts/python.exe
-          else
-            PY=.venv/bin/python
-          fi
-          uv pip install --python "$PY" "mkdocs>=1.6,<2" mkdocs-material
-          "$PY" tools/generate_docs.py
-          "$PY" -m mkdocs build --strict
+        run: pytest -q
 
       - name: Check formatting
-        if: matrix.os == 'ubuntu-latest' && matrix.polars-version == '2.0.0'
         run: cargo fmt --check
 
       - name: Clippy
-        if: matrix.os == 'ubuntu-latest' && matrix.polars-version == '2.0.0'
         run: cargo clippy --all-targets -- -D warnings
+
+      - name: Build documentation
+        run: |
+          pip install "mkdocs>=1.6,<2" mkdocs-material
+          python tools/generate_docs.py
+          mkdocs build --strict
+
+  os:
+    # macOS and Windows are checked on tags and manual dispatches.
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - uses: dtolnay/rust-toolchain@1.95.0
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Install dependencies
+        run: pip install maturin pytest numpy "polars==2.1.0" "polars-talib-fast==2.0.0"
+
+      - name: Install package
+        run: pip install -e . --no-build-isolation
+
+      - name: Test
+        run: pytest -q

@@ -16,12 +16,11 @@ pip install polars_ta_lib
 
 # from source
 uv venv
-uv pip install maturin "polars>=1.44,<3"
+uv pip install maturin "polars>=2.1,<3"
 uv run maturin develop --uv
 ```
 
-Polars 1.44+ is supported. Polars 2.1 requires Python 3.11+, so Python 3.10
-resolves to Polars 1.44–2.0.
+Requires Python 3.11+ and Polars 2.1+.
 
 ## Quick start
 

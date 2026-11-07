@@ -6,7 +6,7 @@
 
 - 设计决策：D1–D10 已定（见 `ARCHITECTURE.md` 第 2 节）。
 - 代码：未开始。
-- 环境：Rust 1.95（Polars 依赖的 `sysinfo 0.39` 要求 1.95）、Python 3.10/3.12、Polars 1.44.2/2.0.0/2.1.0、`ta-lib 0.8.3` 可编译。
+- 环境：Rust 1.95（Polars 依赖的 `sysinfo 0.39` 要求 1.95）、Python 3.11/3.12、Polars 2.1.0、`ta-lib 0.8.3` 可编译。
 
 ## 1. 实现状态（2026-11-07）
 
@@ -15,7 +15,7 @@
 - M2 引擎：完成；引擎行为由 Python 对照测试覆盖（`extension-module` 下 `cargo test` 无法链接 Python 符号，因此不设 Rust 测试目标）。
 - M3 插件边界：完成；N1、Struct、Int32、空/短序列、多 chunk 均验收。
 - M4 Python API：完成；237 个顶层函数、签名、docstring、`.pyi`、`FUNCS`。
-- M5 测试：24 个 pytest 通过；237 函数与 `polars-talib-fast==2.0.0` 在稠密有限数据上数值一致；参数、分组、边界、错误路径已覆盖。兼容性已验证：Polars 1.44.2 / Python 3.10、Polars 2.0.0 / Python 3.10、Polars 2.1.0 / Python 3.12。性能 smoke（dev build，1M 行）：SMA 28.7 ms、EMA 19.9 ms、RSI 21.6 ms、ATR 54.8 ms、MACD 27.3 ms（非硬阈值）。
+- M5 测试：24 个 pytest 通过；237 函数与 `polars-talib-fast==2.0.0` 在稠密有限数据上数值一致；参数、分组、边界、错误路径已覆盖。兼容性已验证：Polars 2.1.0 / Python 3.11、Polars 2.1.0 / Python 3.12。性能 smoke（dev build，1M 行）：SMA 28.7 ms、EMA 19.9 ms、RSI 21.6 ms、ATR 54.8 ms、MACD 27.3 ms（非硬阈值）。
 - M6 打包：README、LICENSE、NOTICE、CI 工作流已加入；包名统一为 `polars_ta_lib`（PyPI 未占用；`polars_ta` import 与已有 `polars-ta` 冲突已消除）；release wheel 已按新包名重建并在全新 venv 中安装验证（24 tests 通过）；MkDocs 文档已从该 wheel 生成并通过 `mkdocs build --strict`；CI 三平台实跑待验证。
 
 ## 2. 里程碑
@@ -36,7 +36,7 @@
 
 - [ ] `Cargo.toml`
   - `cdylib`，lib name `polars_ta_lib`
-  - `pyo3 0.29`（`extension-module`、`abi3-py310`）
+  - `pyo3 0.29`（`extension-module`、`abi3-py311`）
   - `pyo3-polars 0.28`（`derive`、`dtype-struct`）
   - `polars 0.55.2`（`default-features=false`、`dtype-struct`）
   - `polars-arrow 0.55.2`
@@ -46,8 +46,8 @@
   - maturin backend
   - `module-name = "polars_ta_lib._internal"`
   - `python-source = "python"`
-  - `requires-python = ">=3.10"`
-  - `dependencies = ["polars>=1.44,<3"]`
+  - `requires-python = ">=3.11"`
+  - `dependencies = ["polars>=2.1,<3"]`
 - [ ] 目录：`src/`、`python/polars_ta_lib/`、`tests/`
 - [ ] `src/lib.rs`
   - `#[pymodule] _internal`
@@ -236,7 +236,7 @@
 ```bash
 # 环境
 uv venv .venv
-uv pip install --python .venv/bin/python maturin pytest numpy 'polars>=1.44,<3' 'polars-talib-fast==2.0.0'
+uv pip install --python .venv/bin/python maturin pytest numpy 'polars>=2.1,<3' 'polars-talib-fast==2.0.0'
 
 # 构建
 source .venv/bin/activate
@@ -259,6 +259,6 @@ maturin build --release
 - **单 Real 默认 `close` 的合理性**：`acos`/`ln`/`sqrt` 等数学函数默认 `close` 只是统一规则；如用户觉得别扭，后续可改为显式。
 - **Int → Float64 精度**：超过 2^53 的整数会丢精度；文档说明，必要时报错。
 - **fast 对照的版本漂移**：固定 `polars-talib-fast==2.0.0`；升级需重新评估归一化规则。
-- **Polars 版本**：Rust 0.55.2 + Polars 1.44.x–2.1.x 为实测组合；`polars>=1.44,<3` 需在 CI 中覆盖。
+- **Polars 版本**：Rust 0.55.2 + Polars 2.1.x 为实测组合；`polars>=2.1,<3` 需在 CI 中覆盖。
 - **性能**：N1 的有限性扫描是固定成本；若 1M 行场景明显变慢，再考虑分块/SIMD，但不改变契约。
 - **复用 fast 代码的许可**：若直接改写 `talib.rs`，在 `NOTICE` 中保留 MIT 声明；测试只依赖其 wheel，不复制 golden 数据。

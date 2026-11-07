@@ -129,7 +129,7 @@ name = "polars_ta_lib"
 crate-type = ["cdylib"]
 
 [dependencies]
-pyo3 = { version = "0.29", features = ["extension-module", "abi3-py310"] }
+pyo3 = { version = "0.29", features = ["extension-module", "abi3-py311"] }
 pyo3-polars = { version = "0.28", features = ["derive", "dtype-struct"] }
 polars = { version = "0.55.2", default-features = false, features = ["dtype-struct"] }
 polars-arrow = { version = "0.55.2", default-features = false }
@@ -159,8 +159,8 @@ ta-lib = "=0.8.3"
 - `build-backend = "maturin"`。
 - `module-name = "polars_ta_lib._internal"`。
 - `python-source = "python"`。
-- `requires-python = ">=3.10"`。
-- `dependencies = ["polars>=1.44,<3"]`。
+- `requires-python = ">=3.11"`。
+- `dependencies = ["polars>=2.1,<3"]`。
 
 ## 7. 输入契约
 
@@ -394,9 +394,9 @@ Real 输入的形态：
 
 ## 13. 打包与兼容性
 
-- `maturin` + `abi3-py310`。
+- `maturin` + `abi3-py311`。
 - 目标平台：Linux x86_64、macOS arm64、Windows x64。
-- Python `>=3.10`，Polars `>=1.44,<3`。
+- Python `>=3.11`，Polars `>=2.1,<3`。
 - Rust 侧 `polars 0.55.2`；升级 Polars 时同步更新 `pyo3-polars` 和测试矩阵。
 - `ta-lib` 使用精确 pin；升级时重新跑 fast 对照和 C golden。
 - License：本项目 MIT；`ta-lib` BSD-3-Clause；若复用 fast 的引擎代码或测试数据，保留其 MIT 声明。
@@ -410,7 +410,7 @@ Real 输入的形态：
 | 多输出 dtype/字段不一致 | 输出类型函数与运行时共用 `output_spec()` |
 | 严格校验的 O(n) 扫描影响性能 | 基准测试；必要时用 SIMD/分块扫描，但保持语义 |
 | fast 的 NaN 语义与 N1 不同 | 测试前归一化；不让 fast 定义我们的契约 |
-| Polars/`pyo3-polars` 版本漂移 | 固定版本对；CI 覆盖 Polars 1.44.x–2.1.x |
+| Polars/`pyo3-polars` 版本漂移 | 固定版本对；CI 覆盖 Polars 2.1.x |
 | `ta-lib` 新版本改变元数据 | 精确 pin；升级时重跑 237 函数对照 |
 | 默认列在 LazyFrame 中缺列 | 错误由 Polars 明确抛出；文档说明；多 Real 强制显式 |
 

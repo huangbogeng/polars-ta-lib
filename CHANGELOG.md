@@ -15,8 +15,13 @@
 - MkDocs Material API reference generated from TA-Lib metadata.
 - abi3 wheel build, CI matrix, and 24-test suite including 237-function parity
   against `polars-talib-fast==2.0.0`.
-- Tested with Polars 1.44.2 (Python 3.10), 2.0.0 (Python 3.10), and 2.1.0
-  (Python 3.12).
+- Requires Python 3.11+ and Polars 2.1+.
+- Tested with Polars 2.1.0 on Python 3.11 and 3.12.
+
+### Fixed
+
+- Avoid a macOS import-time segfault by not installing `PolarsAllocator`;
+  output buffers are freed by their Arrow release callbacks.
 
 ### Notes
 
