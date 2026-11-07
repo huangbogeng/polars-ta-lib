@@ -5,6 +5,7 @@
 <p><strong>237 TA-Lib indicators as native Polars expressions.</strong></p>
 
 [![CI](https://github.com/huangbogeng/polars-ta-lib/actions/workflows/ci.yml/badge.svg)](https://github.com/huangbogeng/polars-ta-lib/actions/workflows/ci.yml)
+[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-2ea44f.svg)](https://huangbogeng.github.io/polars-ta-lib/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![Polars](https://img.shields.io/badge/polars-2.x-0b7285.svg)](https://pola.rs/)

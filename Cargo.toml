@@ -3,9 +3,13 @@ name = "polars_ta_lib"
 version = "0.1.0"
 edition = "2021"
 rust-version = "1.95"
-description = "TA-Lib indicators as Polars expression plugins"
+description = "237 TA-Lib indicators as native Polars expression plugins"
 license = "MIT"
 repository = "https://github.com/huangbogeng/polars-ta-lib"
+homepage = "https://huangbogeng.github.io/polars-ta-lib/"
+documentation = "https://huangbogeng.github.io/polars-ta-lib/"
+keywords = ["polars", "ta-lib", "technical-analysis", "indicators", "finance"]
+categories = ["finance", "science", "data-structures"]
 
 [lib]
 name = "polars_ta_lib"
