@@ -1,0 +1,7258 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="TA-Lib indicators as Polars expression plugins">
+      
+      
+      
+      
+        <link rel="prev" href="../momentum-indicators/">
+      
+      
+        <link rel="next" href="../pattern-recognition/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Overlap Studies - polars_ta_lib</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#overlap-studies" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="polars_ta_lib" class="md-header__button md-logo" aria-label="polars_ta_lib" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            polars_ta_lib
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overlap Studies
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="polars_ta_lib" class="md-nav__button md-logo" aria-label="polars_ta_lib" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    polars_ta_lib
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cycle-indicators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cycle Indicators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../math-operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math Operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../math-transform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Math Transform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../momentum-indicators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Momentum Indicators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overlap Studies
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overlap Studies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ptaaccbands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.accbands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.accbands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptaalma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.alma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.alma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptabbands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.bbands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.bbands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptacksp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.cksp
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.cksp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptadema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.dema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.dema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptadonchian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.donchian
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.donchian">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptaema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.ema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.ema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptaframa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.frama
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.frama">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptahma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.hma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.hma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptaht_trendline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.ht_trendline
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.ht_trendline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptaichimoku" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.ichimoku
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.ichimoku">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptakama" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.kama
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.kama">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptakc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.kc
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.kc">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptama" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.ma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.ma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptamama" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.mama
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.mama">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptamavp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.mavp
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.mavp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptamcgd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.mcgd
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.mcgd">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptamidpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.midpoint
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.midpoint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptamidprice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.midprice
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.midprice">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptarma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.rma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.rma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptasar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.sar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.sar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptasarext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.sarext
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.sarext">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptasma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.sma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.sma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptasupertrend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.supertrend
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.supertrend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptaswak_butter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.swak_butter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.swak_butter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptaswak_gauss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.swak_gauss
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.swak_gauss">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptat3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.t3
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.t3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptatema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.tema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.tema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptatrima" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.trima
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.trima">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptavidya" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.vidya
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.vidya">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptavwma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.vwma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.vwma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptawma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.wma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.wma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptazigzag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.zigzag
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.zigzag">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptazlema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.zlema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.zlema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pattern-recognition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pattern Recognition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../price-transform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Price Transform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../statistic-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Statistic Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../volatility-indicators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volatility Indicators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../volume-indicators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volume Indicators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementation Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ptaaccbands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.accbands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.accbands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptaalma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.alma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.alma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptabbands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.bbands
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.bbands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptacksp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.cksp
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.cksp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptadema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.dema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.dema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptadonchian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.donchian
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.donchian">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptaema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.ema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.ema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptaframa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.frama
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.frama">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptahma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.hma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.hma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptaht_trendline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.ht_trendline
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.ht_trendline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptaichimoku" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.ichimoku
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.ichimoku">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptakama" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.kama
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.kama">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptakc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.kc
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.kc">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptama" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.ma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.ma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptamama" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.mama
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.mama">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptamavp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.mavp
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.mavp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptamcgd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.mcgd
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.mcgd">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptamidpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.midpoint
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.midpoint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptamidprice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.midprice
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.midprice">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptarma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.rma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.rma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptasar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.sar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.sar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptasarext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.sarext
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.sarext">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptasma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.sma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.sma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptasupertrend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.supertrend
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.supertrend">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptaswak_butter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.swak_butter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.swak_butter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptaswak_gauss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.swak_gauss
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.swak_gauss">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptat3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.t3
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.t3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptatema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.tema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.tema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptatrima" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.trima
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.trima">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptavidya" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.vidya
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.vidya">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptavwma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.vwma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.vwma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptawma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.wma
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.wma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptazigzag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.zigzag
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.zigzag">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ptazlema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pta.zlema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="pta.zlema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inputs_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Outputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="overlap-studies">Overlap Studies</h1>
+<p><a href="../">Back to API overview</a></p>
+<p>34 functions.</p>
+<h2 id="ptaaccbands"><code>pta.accbands</code></h2>
+<p>Acceleration Bands</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">accbands</span><span class="p">(</span><span class="n">high</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"high"</span><span class="p">),</span> <span class="n">low</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"low"</span><span class="p">),</span> <span class="n">close</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>ACCBANDS</code></p>
+<h3 id="inputs">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>high</code></td>
+<td><code>pl.col("high")</code></td>
+</tr>
+<tr>
+<td><code>low</code></td>
+<td><code>pl.col("low")</code></td>
+</tr>
+<tr>
+<td><code>close</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>20</td>
+<td>2 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>upper_band</code></td>
+<td>Float64</td>
+</tr>
+<tr>
+<td><code>middle_band</code></td>
+<td>Float64</td>
+</tr>
+<tr>
+<td><code>lower_band</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<p>Returned as a <code>Struct</code>.</p>
+<h3 id="example">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">accbands</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"out"</span><span class="p">))</span><span class="o">.</span><span class="n">unnest</span><span class="p">(</span><span class="s2">"out"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="ptaalma"><code>pta.alma</code></h2>
+<p>Arnaud Legoux Moving Average</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">alma</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>ALMA</code></p>
+<h3 id="inputs_1">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_1">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>9</td>
+<td>1 .. 100000</td>
+</tr>
+<tr>
+<td><code>sigma</code></td>
+<td><code>optInSigma</code></td>
+<td>float</td>
+<td>6</td>
+<td>0.01 .. 3e+37</td>
+</tr>
+<tr>
+<td><code>offset</code></td>
+<td><code>optInOffset</code></td>
+<td>float</td>
+<td>0.85</td>
+<td>0 .. 1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_1">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_1">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">alma</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"alma"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptabbands"><code>pta.bbands</code></h2>
+<p>Bollinger Bands</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">bbands</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">nb_dev_up</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">nb_dev_dn</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ma_type</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>BBANDS</code></p>
+<h3 id="inputs_2">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_2">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>20</td>
+<td>2 .. 100000</td>
+</tr>
+<tr>
+<td><code>nb_dev_up</code></td>
+<td><code>optInNbDevUp</code></td>
+<td>float</td>
+<td>2</td>
+<td>-3e+37 .. 3e+37</td>
+</tr>
+<tr>
+<td><code>nb_dev_dn</code></td>
+<td><code>optInNbDevDn</code></td>
+<td>float</td>
+<td>2</td>
+<td>-3e+37 .. 3e+37</td>
+</tr>
+<tr>
+<td><code>ma_type</code></td>
+<td><code>optInMAType</code></td>
+<td>int or name</td>
+<td>0</td>
+<td>SMA, EMA, WMA, DEMA, TEMA, TRIMA, KAMA, MAMA, T3, HMA, DISABLED, DEFAULT, ZLEMA, RMA, VIDYA, ALMA</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_2">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>upper_band</code></td>
+<td>Float64</td>
+</tr>
+<tr>
+<td><code>middle_band</code></td>
+<td>Float64</td>
+</tr>
+<tr>
+<td><code>lower_band</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<p>Returned as a <code>Struct</code>.</p>
+<h3 id="example_2">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">bbands</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"out"</span><span class="p">))</span><span class="o">.</span><span class="n">unnest</span><span class="p">(</span><span class="s2">"out"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="ptacksp"><code>pta.cksp</code></h2>
+<p>Chande Kroll Stop</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">cksp</span><span class="p">(</span><span class="n">high</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"high"</span><span class="p">),</span> <span class="n">low</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"low"</span><span class="p">),</span> <span class="n">close</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">multiplier</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">stop_period</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>CKSP</code></p>
+<h3 id="inputs_3">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>high</code></td>
+<td><code>pl.col("high")</code></td>
+</tr>
+<tr>
+<td><code>low</code></td>
+<td><code>pl.col("low")</code></td>
+</tr>
+<tr>
+<td><code>close</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_3">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>10</td>
+<td>2 .. 100000</td>
+</tr>
+<tr>
+<td><code>multiplier</code></td>
+<td><code>optInMultiplier</code></td>
+<td>float</td>
+<td>1</td>
+<td>0 .. 3e+37</td>
+</tr>
+<tr>
+<td><code>stop_period</code></td>
+<td><code>optInStopPeriod</code></td>
+<td>int</td>
+<td>9</td>
+<td>1 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_3">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>high_stop</code></td>
+<td>Float64</td>
+</tr>
+<tr>
+<td><code>low_stop</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<p>Returned as a <code>Struct</code>.</p>
+<h3 id="example_3">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">cksp</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"out"</span><span class="p">))</span><span class="o">.</span><span class="n">unnest</span><span class="p">(</span><span class="s2">"out"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="ptadema"><code>pta.dema</code></h2>
+<p>Double Exponential Moving Average</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">dema</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>DEMA</code></p>
+<h3 id="inputs_4">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_4">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>30</td>
+<td>1 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_4">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_4">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">dema</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"dema"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptadonchian"><code>pta.donchian</code></h2>
+<p>Donchian Channels</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">donchian</span><span class="p">(</span><span class="n">high</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"high"</span><span class="p">),</span> <span class="n">low</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"low"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>DONCHIAN</code></p>
+<h3 id="inputs_5">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>high</code></td>
+<td><code>pl.col("high")</code></td>
+</tr>
+<tr>
+<td><code>low</code></td>
+<td><code>pl.col("low")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_5">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>20</td>
+<td>2 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_5">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>upper_band</code></td>
+<td>Float64</td>
+</tr>
+<tr>
+<td><code>middle_band</code></td>
+<td>Float64</td>
+</tr>
+<tr>
+<td><code>lower_band</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<p>Returned as a <code>Struct</code>.</p>
+<h3 id="example_5">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">donchian</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"out"</span><span class="p">))</span><span class="o">.</span><span class="n">unnest</span><span class="p">(</span><span class="s2">"out"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="ptaema"><code>pta.ema</code></h2>
+<p>Exponential Moving Average</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">ema</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>EMA</code></p>
+<h3 id="inputs_6">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_6">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>30</td>
+<td>1 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_6">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_6">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">ema</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"ema"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptaframa"><code>pta.frama</code></h2>
+<p>Fractal Adaptive Moving Average</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">frama</span><span class="p">(</span><span class="n">high</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"high"</span><span class="p">),</span> <span class="n">low</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"low"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>FRAMA</code></p>
+<h3 id="inputs_7">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>high</code></td>
+<td><code>pl.col("high")</code></td>
+</tr>
+<tr>
+<td><code>low</code></td>
+<td><code>pl.col("low")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_7">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>16</td>
+<td>2 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_7">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_7">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">frama</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"frama"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptahma"><code>pta.hma</code></h2>
+<p>Hull Moving Average</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">hma</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>HMA</code></p>
+<h3 id="inputs_8">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_8">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>20</td>
+<td>1 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_8">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_8">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">hma</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"hma"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptaht_trendline"><code>pta.ht_trendline</code></h2>
+<p>Hilbert Transform - Instantaneous Trendline</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">ht_trendline</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>HT_TRENDLINE</code></p>
+<h3 id="inputs_9">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_9">Parameters</h3>
+<p>None.</p>
+<h3 id="outputs_9">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_9">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">ht_trendline</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"ht_trendline"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptaichimoku"><code>pta.ichimoku</code></h2>
+<p>Ichimoku Kinko Hyo</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">ichimoku</span><span class="p">(</span><span class="n">high</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"high"</span><span class="p">),</span> <span class="n">low</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"low"</span><span class="p">),</span> <span class="n">tenkan_period</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">kijun_period</span><span class="o">=</span><span class="mi">26</span><span class="p">,</span> <span class="n">senkou_b_period</span><span class="o">=</span><span class="mi">52</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>ICHIMOKU</code></p>
+<h3 id="inputs_10">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>high</code></td>
+<td><code>pl.col("high")</code></td>
+</tr>
+<tr>
+<td><code>low</code></td>
+<td><code>pl.col("low")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_10">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tenkan_period</code></td>
+<td><code>optInTenkanPeriod</code></td>
+<td>int</td>
+<td>9</td>
+<td>2 .. 100000</td>
+</tr>
+<tr>
+<td><code>kijun_period</code></td>
+<td><code>optInKijunPeriod</code></td>
+<td>int</td>
+<td>26</td>
+<td>2 .. 100000</td>
+</tr>
+<tr>
+<td><code>senkou_b_period</code></td>
+<td><code>optInSenkouBPeriod</code></td>
+<td>int</td>
+<td>52</td>
+<td>2 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_10">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tenkan_sen</code></td>
+<td>Float64</td>
+</tr>
+<tr>
+<td><code>kijun_sen</code></td>
+<td>Float64</td>
+</tr>
+<tr>
+<td><code>senkou_span_a</code></td>
+<td>Float64</td>
+</tr>
+<tr>
+<td><code>senkou_span_b</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<p>Returned as a <code>Struct</code>.</p>
+<h3 id="example_10">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">ichimoku</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"out"</span><span class="p">))</span><span class="o">.</span><span class="n">unnest</span><span class="p">(</span><span class="s2">"out"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="ptakama"><code>pta.kama</code></h2>
+<p>Kaufman Adaptive Moving Average</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">kama</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>KAMA</code></p>
+<h3 id="inputs_11">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_11">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>30</td>
+<td>1 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_11">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_11">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">kama</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"kama"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptakc"><code>pta.kc</code></h2>
+<p>Keltner Channels</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">kc</span><span class="p">(</span><span class="n">high</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"high"</span><span class="p">),</span> <span class="n">low</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"low"</span><span class="p">),</span> <span class="n">close</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">atr_period</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">nb_dev</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>KC</code></p>
+<h3 id="inputs_12">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>high</code></td>
+<td><code>pl.col("high")</code></td>
+</tr>
+<tr>
+<td><code>low</code></td>
+<td><code>pl.col("low")</code></td>
+</tr>
+<tr>
+<td><code>close</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_12">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>20</td>
+<td>2 .. 100000</td>
+</tr>
+<tr>
+<td><code>atr_period</code></td>
+<td><code>optInATRPeriod</code></td>
+<td>int</td>
+<td>10</td>
+<td>1 .. 100000</td>
+</tr>
+<tr>
+<td><code>nb_dev</code></td>
+<td><code>optInNbDev</code></td>
+<td>float</td>
+<td>2</td>
+<td>-3e+37 .. 3e+37</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_12">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>upper_band</code></td>
+<td>Float64</td>
+</tr>
+<tr>
+<td><code>middle_band</code></td>
+<td>Float64</td>
+</tr>
+<tr>
+<td><code>lower_band</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<p>Returned as a <code>Struct</code>.</p>
+<h3 id="example_12">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">kc</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"out"</span><span class="p">))</span><span class="o">.</span><span class="n">unnest</span><span class="p">(</span><span class="s2">"out"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="ptama"><code>pta.ma</code></h2>
+<p>Moving average</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">ma</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">ma_type</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>MA</code></p>
+<h3 id="inputs_13">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_13">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>30</td>
+<td>1 .. 100000</td>
+</tr>
+<tr>
+<td><code>ma_type</code></td>
+<td><code>optInMAType</code></td>
+<td>int or name</td>
+<td>0</td>
+<td>SMA, EMA, WMA, DEMA, TEMA, TRIMA, KAMA, MAMA, T3, HMA, DISABLED, DEFAULT, ZLEMA, RMA, VIDYA, ALMA</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_13">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_13">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">ma</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"ma"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptamama"><code>pta.mama</code></h2>
+<p>MESA Adaptive Moving Average</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">mama</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">fast_limit</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">slow_limit</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>MAMA</code></p>
+<h3 id="inputs_14">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_14">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fast_limit</code></td>
+<td><code>optInFastLimit</code></td>
+<td>float</td>
+<td>0.5</td>
+<td>0.01 .. 0.99</td>
+</tr>
+<tr>
+<td><code>slow_limit</code></td>
+<td><code>optInSlowLimit</code></td>
+<td>float</td>
+<td>0.05</td>
+<td>0.01 .. 0.99</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_14">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mama</code></td>
+<td>Float64</td>
+</tr>
+<tr>
+<td><code>fama</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<p>Returned as a <code>Struct</code>.</p>
+<h3 id="example_14">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">mama</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"out"</span><span class="p">))</span><span class="o">.</span><span class="n">unnest</span><span class="p">(</span><span class="s2">"out"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="ptamavp"><code>pta.mavp</code></h2>
+<p>Moving average with variable period</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">mavp</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">periods</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"periods"</span><span class="p">),</span> <span class="n">min_period</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">max_period</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">ma_type</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>MAVP</code></p>
+<h3 id="inputs_15">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+<tr>
+<td><code>periods</code></td>
+<td><code>pl.col("periods")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_15">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>min_period</code></td>
+<td><code>optInMinPeriod</code></td>
+<td>int</td>
+<td>2</td>
+<td>1 .. 10000</td>
+</tr>
+<tr>
+<td><code>max_period</code></td>
+<td><code>optInMaxPeriod</code></td>
+<td>int</td>
+<td>30</td>
+<td>1 .. 10000</td>
+</tr>
+<tr>
+<td><code>ma_type</code></td>
+<td><code>optInMAType</code></td>
+<td>int or name</td>
+<td>0</td>
+<td>SMA, EMA, WMA, DEMA, TEMA, TRIMA, KAMA, MAMA, T3, HMA, DISABLED, DEFAULT, ZLEMA, RMA, VIDYA, ALMA</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_15">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_15">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">mavp</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"mavp"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptamcgd"><code>pta.mcgd</code></h2>
+<p>McGinley Dynamic</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">mcgd</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>MCGD</code></p>
+<h3 id="inputs_16">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_16">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>14</td>
+<td>2 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_16">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_16">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">mcgd</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"mcgd"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptamidpoint"><code>pta.midpoint</code></h2>
+<p>MidPoint over period</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">midpoint</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>MIDPOINT</code></p>
+<h3 id="inputs_17">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_17">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>14</td>
+<td>2 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_17">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_17">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">midpoint</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"midpoint"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptamidprice"><code>pta.midprice</code></h2>
+<p>Midpoint Price over period</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">midprice</span><span class="p">(</span><span class="n">high</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"high"</span><span class="p">),</span> <span class="n">low</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"low"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>MIDPRICE</code></p>
+<h3 id="inputs_18">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>high</code></td>
+<td><code>pl.col("high")</code></td>
+</tr>
+<tr>
+<td><code>low</code></td>
+<td><code>pl.col("low")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_18">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>14</td>
+<td>2 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_18">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_18">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">midprice</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"midprice"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptarma"><code>pta.rma</code></h2>
+<p>Wilder's Smoothed Moving Average</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">rma</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>RMA</code></p>
+<h3 id="inputs_19">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_19">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>30</td>
+<td>1 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_19">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_19">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">rma</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"rma"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptasar"><code>pta.sar</code></h2>
+<p>Parabolic SAR</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">sar</span><span class="p">(</span><span class="n">high</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"high"</span><span class="p">),</span> <span class="n">low</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"low"</span><span class="p">),</span> <span class="n">acceleration</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">maximum</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>SAR</code></p>
+<h3 id="inputs_20">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>high</code></td>
+<td><code>pl.col("high")</code></td>
+</tr>
+<tr>
+<td><code>low</code></td>
+<td><code>pl.col("low")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_20">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>acceleration</code></td>
+<td><code>optInAcceleration</code></td>
+<td>float</td>
+<td>0.02</td>
+<td>0 .. 3e+37</td>
+</tr>
+<tr>
+<td><code>maximum</code></td>
+<td><code>optInMaximum</code></td>
+<td>float</td>
+<td>0.2</td>
+<td>0 .. 3e+37</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_20">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_20">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">sar</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"sar"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptasarext"><code>pta.sarext</code></h2>
+<p>Parabolic SAR - Extended</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">sarext</span><span class="p">(</span><span class="n">high</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"high"</span><span class="p">),</span> <span class="n">low</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"low"</span><span class="p">),</span> <span class="n">start_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">offset_on_reverse</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">acceleration_init_long</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">acceleration_long</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">acceleration_max_long</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">acceleration_init_short</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">acceleration_short</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">acceleration_max_short</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>SAREXT</code></p>
+<h3 id="inputs_21">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>high</code></td>
+<td><code>pl.col("high")</code></td>
+</tr>
+<tr>
+<td><code>low</code></td>
+<td><code>pl.col("low")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_21">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>start_value</code></td>
+<td><code>optInStartValue</code></td>
+<td>float</td>
+<td>0</td>
+<td>-3e+37 .. 3e+37</td>
+</tr>
+<tr>
+<td><code>offset_on_reverse</code></td>
+<td><code>optInOffsetOnReverse</code></td>
+<td>float</td>
+<td>0</td>
+<td>0 .. 3e+37</td>
+</tr>
+<tr>
+<td><code>acceleration_init_long</code></td>
+<td><code>optInAccelerationInitLong</code></td>
+<td>float</td>
+<td>0.02</td>
+<td>0 .. 3e+37</td>
+</tr>
+<tr>
+<td><code>acceleration_long</code></td>
+<td><code>optInAccelerationLong</code></td>
+<td>float</td>
+<td>0.02</td>
+<td>0 .. 3e+37</td>
+</tr>
+<tr>
+<td><code>acceleration_max_long</code></td>
+<td><code>optInAccelerationMaxLong</code></td>
+<td>float</td>
+<td>0.2</td>
+<td>0 .. 3e+37</td>
+</tr>
+<tr>
+<td><code>acceleration_init_short</code></td>
+<td><code>optInAccelerationInitShort</code></td>
+<td>float</td>
+<td>0.02</td>
+<td>0 .. 3e+37</td>
+</tr>
+<tr>
+<td><code>acceleration_short</code></td>
+<td><code>optInAccelerationShort</code></td>
+<td>float</td>
+<td>0.02</td>
+<td>0 .. 3e+37</td>
+</tr>
+<tr>
+<td><code>acceleration_max_short</code></td>
+<td><code>optInAccelerationMaxShort</code></td>
+<td>float</td>
+<td>0.2</td>
+<td>0 .. 3e+37</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_21">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_21">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">sarext</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"sarext"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptasma"><code>pta.sma</code></h2>
+<p>Simple Moving Average</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">sma</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>SMA</code></p>
+<h3 id="inputs_22">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_22">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>30</td>
+<td>1 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_22">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_22">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">sma</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"sma"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptasupertrend"><code>pta.supertrend</code></h2>
+<p>SuperTrend</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">supertrend</span><span class="p">(</span><span class="n">high</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"high"</span><span class="p">),</span> <span class="n">low</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"low"</span><span class="p">),</span> <span class="n">close</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">multiplier</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>SUPERTREND</code></p>
+<h3 id="inputs_23">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>high</code></td>
+<td><code>pl.col("high")</code></td>
+</tr>
+<tr>
+<td><code>low</code></td>
+<td><code>pl.col("low")</code></td>
+</tr>
+<tr>
+<td><code>close</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_23">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>10</td>
+<td>2 .. 100000</td>
+</tr>
+<tr>
+<td><code>multiplier</code></td>
+<td><code>optInMultiplier</code></td>
+<td>float</td>
+<td>3</td>
+<td>0 .. 3e+37</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_23">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>supertrend</code></td>
+<td>Float64</td>
+</tr>
+<tr>
+<td><code>trend</code></td>
+<td>Int32</td>
+</tr>
+</tbody>
+</table>
+<p>Returned as a <code>Struct</code>.</p>
+<h3 id="example_23">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">supertrend</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"out"</span><span class="p">))</span><span class="o">.</span><span class="n">unnest</span><span class="p">(</span><span class="s2">"out"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="ptaswak_butter"><code>pta.swak_butter</code></h2>
+<p>Swiss Army Knife - Butterworth Filter</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">swak_butter</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>SWAK_BUTTER</code></p>
+<h3 id="inputs_24">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_24">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>20</td>
+<td>2 .. 10000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_24">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_24">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">swak_butter</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"swak_butter"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptaswak_gauss"><code>pta.swak_gauss</code></h2>
+<p>Swiss Army Knife - Gaussian Filter</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">swak_gauss</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>SWAK_GAUSS</code></p>
+<h3 id="inputs_25">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_25">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>20</td>
+<td>2 .. 10000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_25">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_25">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">swak_gauss</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"swak_gauss"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptat3"><code>pta.t3</code></h2>
+<p>Triple Exponential Moving Average (T3)</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">t3</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">v_factor</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>T3</code></p>
+<h3 id="inputs_26">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_26">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>5</td>
+<td>1 .. 100000</td>
+</tr>
+<tr>
+<td><code>v_factor</code></td>
+<td><code>optInVFactor</code></td>
+<td>float</td>
+<td>0.7</td>
+<td>0 .. 1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_26">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_26">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">t3</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"t3"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptatema"><code>pta.tema</code></h2>
+<p>Triple Exponential Moving Average</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">tema</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>TEMA</code></p>
+<h3 id="inputs_27">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_27">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>30</td>
+<td>1 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_27">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_27">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">tema</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"tema"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptatrima"><code>pta.trima</code></h2>
+<p>Triangular Moving Average</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">trima</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>TRIMA</code></p>
+<h3 id="inputs_28">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_28">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>30</td>
+<td>1 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_28">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_28">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">trima</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"trima"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptavidya"><code>pta.vidya</code></h2>
+<p>Variable Index Dynamic Average</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">vidya</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">cmo_period</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>VIDYA</code></p>
+<h3 id="inputs_29">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_29">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>12</td>
+<td>1 .. 100000</td>
+</tr>
+<tr>
+<td><code>cmo_period</code></td>
+<td><code>optInCMOPeriod</code></td>
+<td>int</td>
+<td>9</td>
+<td>2 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_29">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_29">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">vidya</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"vidya"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptavwma"><code>pta.vwma</code></h2>
+<p>Volume Weighted Moving Average</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">vwma</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">volume</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"volume"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>VWMA</code></p>
+<h3 id="inputs_30">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+<tr>
+<td><code>volume</code></td>
+<td><code>pl.col("volume")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_30">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>30</td>
+<td>1 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_30">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_30">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">vwma</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"vwma"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptawma"><code>pta.wma</code></h2>
+<p>Weighted Moving Average</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">wma</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>WMA</code></p>
+<h3 id="inputs_31">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_31">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>30</td>
+<td>1 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_31">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_31">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">wma</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"wma"</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="ptazigzag"><code>pta.zigzag</code></h2>
+<p>Zig Zag</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">zigzag</span><span class="p">(</span><span class="n">high</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"high"</span><span class="p">),</span> <span class="n">low</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"low"</span><span class="p">),</span> <span class="n">sensitivity</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_trend_length</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>ZIGZAG</code></p>
+<h3 id="inputs_32">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>high</code></td>
+<td><code>pl.col("high")</code></td>
+</tr>
+<tr>
+<td><code>low</code></td>
+<td><code>pl.col("low")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_32">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sensitivity</code></td>
+<td><code>optInSensitivity</code></td>
+<td>float</td>
+<td>5</td>
+<td>0 .. 100</td>
+</tr>
+<tr>
+<td><code>min_trend_length</code></td>
+<td><code>optInMinTrendLength</code></td>
+<td>int</td>
+<td>1</td>
+<td>1 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_32">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>zig_zag</code></td>
+<td>Float64</td>
+</tr>
+<tr>
+<td><code>trend</code></td>
+<td>Int32</td>
+</tr>
+<tr>
+<td><code>pivot_idx</code></td>
+<td>Int32</td>
+</tr>
+</tbody>
+</table>
+<p>Returned as a <code>Struct</code>.</p>
+<h3 id="example_32">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">zigzag</span><span class="p">()</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"out"</span><span class="p">))</span><span class="o">.</span><span class="n">unnest</span><span class="p">(</span><span class="s2">"out"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="ptazlema"><code>pta.zlema</code></h2>
+<p>Zero-Lag Exponential Moving Average</p>
+<div class="highlight"><pre><span></span><code><span class="n">pta</span><span class="o">.</span><span class="n">zlema</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">"close"</span><span class="p">),</span> <span class="n">time_period</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>TA-Lib name:</strong> <code>ZLEMA</code></p>
+<h3 id="inputs_33">Inputs</h3>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td><code>pl.col("close")</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters_33">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>TA-Lib name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Range / values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time_period</code></td>
+<td><code>optInTimePeriod</code></td>
+<td>int</td>
+<td>30</td>
+<td>1 .. 100000</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputs_33">Outputs</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>dtype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>real</code></td>
+<td>Float64</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_33">Example</h3>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">pta</span><span class="o">.</span><span class="n">zlema</span><span class="p">(</span><span class="n">time_period</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"zlema"</span><span class="p">))</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
