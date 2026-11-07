@@ -830,9 +830,11 @@ pip<span class="w"> </span>install<span class="w"> </span>polars_ta_lib
 
 <span class="c1"># from source</span>
 uv<span class="w"> </span>venv
-uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>maturin<span class="w"> </span><span class="s2">"polars==2.0.0"</span>
+uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>maturin<span class="w"> </span><span class="s2">"polars&gt;=1.44,&lt;3"</span>
 uv<span class="w"> </span>run<span class="w"> </span>maturin<span class="w"> </span>develop<span class="w"> </span>--uv
 </code></pre></div>
+<p>Polars 1.44+ is supported. Polars 2.1 requires Python 3.11+, so Python 3.10
+resolves to Polars 1.44–2.0.</p>
 <h2 id="quick-start">Quick start</h2>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">polars_ta_lib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pta</span>

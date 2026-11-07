@@ -1619,7 +1619,7 @@ Python 模块出口        src/lib.rs
 <li><code>module-name = "polars_ta_lib._internal"</code>。</li>
 <li><code>python-source = "python"</code>。</li>
 <li><code>requires-python = "&gt;=3.10"</code>。</li>
-<li><code>dependencies = ["polars&gt;=2.0,&lt;3"]</code>。</li>
+<li><code>dependencies = ["polars&gt;=1.44,&lt;3"]</code>。</li>
 </ul>
 <h2 id="7">7. 输入契约</h2>
 <h3 id="71">7.1 绑定</h3>
@@ -1898,7 +1898,7 @@ Python 模块出口        src/lib.rs
 <ul>
 <li><code>maturin</code> + <code>abi3-py310</code>。</li>
 <li>目标平台：Linux x86_64、macOS arm64、Windows x64。</li>
-<li>Python <code>&gt;=3.10</code>，Polars <code>&gt;=2.0,&lt;3</code>。</li>
+<li>Python <code>&gt;=3.10</code>，Polars <code>&gt;=1.44,&lt;3</code>。</li>
 <li>Rust 侧 <code>polars 0.55.2</code>；升级 Polars 时同步更新 <code>pyo3-polars</code> 和测试矩阵。</li>
 <li><code>ta-lib</code> 使用精确 pin；升级时重新跑 fast 对照和 C golden。</li>
 <li>License：本项目 MIT；<code>ta-lib</code> BSD-3-Clause；若复用 fast 的引擎代码或测试数据，保留其 MIT 声明。</li>
@@ -1934,7 +1934,7 @@ Python 模块出口        src/lib.rs
 </tr>
 <tr>
 <td>Polars/<code>pyo3-polars</code> 版本漂移</td>
-<td>固定版本对；CI 覆盖 Python 2.0.x</td>
+<td>固定版本对；CI 覆盖 Polars 1.44.x–2.1.x</td>
 </tr>
 <tr>
 <td><code>ta-lib</code> 新版本改变元数据</td>

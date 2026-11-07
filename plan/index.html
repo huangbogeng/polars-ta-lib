@@ -1053,7 +1053,7 @@
 <ul>
 <li>设计决策：D1–D10 已定（见 <code>ARCHITECTURE.md</code> 第 2 节）。</li>
 <li>代码：未开始。</li>
-<li>环境：Rust 1.95（Polars 依赖的 <code>sysinfo 0.39</code> 要求 1.95）、Python 3.10、Polars 2.0.0、<code>ta-lib 0.8.3</code> 可编译。</li>
+<li>环境：Rust 1.95（Polars 依赖的 <code>sysinfo 0.39</code> 要求 1.95）、Python 3.10/3.12、Polars 1.44.2/2.0.0/2.1.0、<code>ta-lib 0.8.3</code> 可编译。</li>
 </ul>
 <h2 id="1-2026-11-07">1. 实现状态（2026-11-07）</h2>
 <ul>
@@ -1063,7 +1063,7 @@
 <li>M3 插件边界：完成；N1、Struct、Int32、空/短序列、多 chunk 均验收。</li>
 <li>M4 Python API：完成；237 个顶层函数、签名、docstring、<code>.pyi</code>、<code>FUNCS</code>。</li>
 <li>M5 测试：24 个 pytest 通过；237 函数与 <code>polars-talib-fast==2.0.0</code> 在稠密有限数据上数值一致；参数、分组、边界、错误路径已覆盖。性能 smoke（dev build，1M 行）：SMA 28.7 ms、EMA 19.9 ms、RSI 21.6 ms、ATR 54.8 ms、MACD 27.3 ms（非硬阈值）。</li>
-<li>M6 打包：README、LICENSE、NOTICE、CI 工作流已加入；包名统一为 <code>polars_ta_lib</code>（PyPI 未占用；<code>polars_ta</code> import 与已有 <code>polars-ta</code> 冲突已消除）；release wheel 正在按新包名重建并在全新 venv 中验证；MkDocs 文档已生成并通过 <code>mkdocs build --strict</code>；CI 三平台实跑待验证。</li>
+<li>M6 打包：README、LICENSE、NOTICE、CI 工作流已加入；包名统一为 <code>polars_ta_lib</code>（PyPI 未占用；<code>polars_ta</code> import 与已有 <code>polars-ta</code> 冲突已消除）；release wheel 已按新包名重建并在全新 venv 中安装验证（24 tests 通过）；MkDocs 文档已从该 wheel 生成并通过 <code>mkdocs build --strict</code>；CI 三平台实跑待验证。</li>
 </ul>
 <h2 id="2">2. 里程碑</h2>
 <blockquote>
@@ -1092,7 +1092,7 @@
 <li><code>module-name = "polars_ta_lib._internal"</code></li>
 <li><code>python-source = "python"</code></li>
 <li><code>requires-python = "&gt;=3.10"</code></li>
-<li><code>dependencies = ["polars&gt;=2.0,&lt;3"]</code></li>
+<li><code>dependencies = ["polars&gt;=1.44,&lt;3"]</code></li>
 <li>[ ] 目录：<code>src/</code>、<code>python/polars_ta_lib/</code>、<code>tests/</code></li>
 <li>[ ] <code>src/lib.rs</code></li>
 <li><code>#[pymodule] _internal</code></li>
@@ -1337,7 +1337,7 @@
 <h2 id="5">5. 常用命令</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># 环境</span>
 uv<span class="w"> </span>venv<span class="w"> </span>.venv
-uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--python<span class="w"> </span>.venv/bin/python<span class="w"> </span>maturin<span class="w"> </span>pytest<span class="w"> </span>numpy<span class="w"> </span><span class="s1">'polars==2.0.0'</span><span class="w"> </span><span class="s1">'polars-talib-fast==2.0.0'</span>
+uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--python<span class="w"> </span>.venv/bin/python<span class="w"> </span>maturin<span class="w"> </span>pytest<span class="w"> </span>numpy<span class="w"> </span><span class="s1">'polars&gt;=1.44,&lt;3'</span><span class="w"> </span><span class="s1">'polars-talib-fast==2.0.0'</span>
 
 <span class="c1"># 构建</span>
 <span class="nb">source</span><span class="w"> </span>.venv/bin/activate
@@ -1359,7 +1359,7 @@ maturin<span class="w"> </span>build<span class="w"> </span>--release
 <li><strong>单 Real 默认 <code>close</code> 的合理性</strong>：<code>acos</code>/<code>ln</code>/<code>sqrt</code> 等数学函数默认 <code>close</code> 只是统一规则；如用户觉得别扭，后续可改为显式。</li>
 <li><strong>Int → Float64 精度</strong>：超过 2^53 的整数会丢精度；文档说明，必要时报错。</li>
 <li><strong>fast 对照的版本漂移</strong>：固定 <code>polars-talib-fast==2.0.0</code>；升级需重新评估归一化规则。</li>
-<li><strong>Polars 版本</strong>：Rust 0.55.2 / Python 2.0.x 为实测组合；<code>polars&gt;=2.0,&lt;3</code> 需在 CI 中覆盖。</li>
+<li><strong>Polars 版本</strong>：Rust 0.55.2 + Polars 1.44.x–2.1.x 为实测组合；<code>polars&gt;=1.44,&lt;3</code> 需在 CI 中覆盖。</li>
 <li><strong>性能</strong>：N1 的有限性扫描是固定成本；若 1M 行场景明显变慢，再考虑分块/SIMD，但不改变契约。</li>
 <li><strong>复用 fast 代码的许可</strong>：若直接改写 <code>talib.rs</code>，在 <code>NOTICE</code> 中保留 MIT 声明；测试只依赖其 wheel，不复制 golden 数据。</li>
 </ul>
