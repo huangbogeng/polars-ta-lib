@@ -825,8 +825,8 @@
 <li>Strict input contract and Polars-native null output.</li>
 </ul>
 <h2 id="install">Install</h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># from PyPI (once published; PyPI normalizes the name to polars-ta-lib)</span>
-pip<span class="w"> </span>install<span class="w"> </span>polars_ta_lib
+<div class="highlight"><pre><span></span><code><span class="c1"># from PyPI</span>
+pip<span class="w"> </span>install<span class="w"> </span>polars_ta_lib_extension
 
 <span class="c1"># from source</span>
 uv<span class="w"> </span>venv
@@ -834,6 +834,8 @@ uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </s
 uv<span class="w"> </span>run<span class="w"> </span>maturin<span class="w"> </span>develop<span class="w"> </span>--uv
 </code></pre></div>
 <p>Requires Python 3.11+ and Polars 2.1+.</p>
+<p>PyPI distribution is <code>polars_ta_lib_extension</code>; the Python import remains
+<code>polars_ta_lib</code>.</p>
 <h2 id="quick-start">Quick start</h2>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">polars_ta_lib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pta</span>
