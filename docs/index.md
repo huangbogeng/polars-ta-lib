@@ -11,7 +11,7 @@ TA-Lib indicators as Polars expression plugins.
 ## Install
 
 ```bash
-# from PyPI (once published; PyPI normalizes the name to polars-ta-lib-extension)
+# from PyPI
 pip install polars_ta_lib_extension
 
 # from source

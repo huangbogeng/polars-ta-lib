@@ -5,6 +5,7 @@
 <p><strong>237 TA-Lib indicators as native Polars expressions.</strong></p>
 
 [![CI](https://github.com/huangbogeng/polars-ta-lib/actions/workflows/ci.yml/badge.svg)](https://github.com/huangbogeng/polars-ta-lib/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/polars_ta_lib_extension.svg)](https://pypi.org/project/polars-ta-lib-extension/)
 [![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-2ea44f.svg)](https://huangbogeng.github.io/polars-ta-lib/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
@@ -32,11 +33,11 @@ global initialization, and no per-row Python callbacks.
 
 ## Install
 
-> The targeted PyPI name is `polars_ta_lib_extension` (canonical: `polars-ta-lib-extension`);
-> it is currently unoccupied. Publication is pending, so build from source for now.
+> Available on PyPI as **`polars_ta_lib_extension`**
+> (canonical: [`polars-ta-lib-extension`](https://pypi.org/project/polars-ta-lib-extension/)).
 
 ```bash
-# from PyPI, once published
+# from PyPI
 pip install polars_ta_lib_extension
 
 # from source

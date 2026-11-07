@@ -9,8 +9,11 @@ It uses PyPI Trusted Publishing: no PyPI API token is stored in GitHub.
 
 ## 0. Before you start
 
-- The PyPI name is unoccupied.
-- Version is `0.1.0` (`Cargo.toml`; `pyproject.toml` reads it dynamically).
+The first release is already on PyPI:
+https://pypi.org/project/polars-ta-lib-extension/
+
+- PyPI release `0.1.0` exists and is immutable.
+- Future versions require bumping `Cargo.toml` (`pyproject.toml` reads it dynamically).
 - Local metadata check:
 
 ```bash
