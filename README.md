@@ -245,6 +245,7 @@ mkdocs build --strict      # output in site/
 
 - [Architecture](ARCHITECTURE.md)
 - [Implementation plan](PLAN.md)
+- [Publishing to PyPI](PUBLISHING.md)
 - [TA-Lib license](LICENSES/TA-Lib.txt)
 
 ## Status
