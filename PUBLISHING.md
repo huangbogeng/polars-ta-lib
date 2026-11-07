@@ -58,7 +58,7 @@ gh workflow run publish.yml
 The workflow builds:
 
 - Linux x86_64, manylinux_2_17
-- macOS universal2
+- macOS arm64 and x86_64
 - Windows x86_64
 - sdist
 
