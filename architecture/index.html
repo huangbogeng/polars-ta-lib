@@ -1562,7 +1562,7 @@ Python 模块出口        src/lib.rs
 │   ├── architecture.md      # 生成
 │   └── plan.md              # 生成
 ├── src/
-│   ├── lib.rs              # PyO3 模块、PolarsAllocator、metadata 导出
+│   ├── lib.rs              # PyO3 模块、metadata 导出
 │   ├── expressions.rs      # 唯一 #[polars_expr] fn call
 │   ├── engine.rs           # TA-Lib 安全层
 │   └── meta.rs             # 元数据、P1 命名、输出 dtype
@@ -1600,7 +1600,7 @@ Python 模块出口        src/lib.rs
 <p><code>src/lib.rs</code>：</p>
 <ul>
 <li><code>#[pymodule] fn _internal(...)</code>，导出 <code>__version__</code> 和 <code>functions_json()</code>。</li>
-<li><code>#[global_allocator] static ALLOC: PolarsAllocator = PolarsAllocator::new();</code></li>
+<li>不使用 <code>PolarsAllocator</code>：macOS 导入期申请 allocator capsule 会触发段错误；输出 buffer 的 Arrow release callback 已负责释放。</li>
 <li><code>functions_json()</code> 返回全部 237 个函数的元数据 JSON（见第 9 节）。</li>
 </ul>
 <p><code>src/expressions.rs</code>：</p>

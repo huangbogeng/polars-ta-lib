@@ -1062,7 +1062,7 @@
 <li>M2 引擎：完成；引擎行为由 Python 对照测试覆盖（<code>extension-module</code> 下 <code>cargo test</code> 无法链接 Python 符号，因此不设 Rust 测试目标）。</li>
 <li>M3 插件边界：完成；N1、Struct、Int32、空/短序列、多 chunk 均验收。</li>
 <li>M4 Python API：完成；237 个顶层函数、签名、docstring、<code>.pyi</code>、<code>FUNCS</code>。</li>
-<li>M5 测试：24 个 pytest 通过；237 函数与 <code>polars-talib-fast==2.0.0</code> 在稠密有限数据上数值一致；参数、分组、边界、错误路径已覆盖。性能 smoke（dev build，1M 行）：SMA 28.7 ms、EMA 19.9 ms、RSI 21.6 ms、ATR 54.8 ms、MACD 27.3 ms（非硬阈值）。</li>
+<li>M5 测试：24 个 pytest 通过；237 函数与 <code>polars-talib-fast==2.0.0</code> 在稠密有限数据上数值一致；参数、分组、边界、错误路径已覆盖。兼容性已验证：Polars 1.44.2 / Python 3.10、Polars 2.0.0 / Python 3.10、Polars 2.1.0 / Python 3.12。性能 smoke（dev build，1M 行）：SMA 28.7 ms、EMA 19.9 ms、RSI 21.6 ms、ATR 54.8 ms、MACD 27.3 ms（非硬阈值）。</li>
 <li>M6 打包：README、LICENSE、NOTICE、CI 工作流已加入；包名统一为 <code>polars_ta_lib</code>（PyPI 未占用；<code>polars_ta</code> import 与已有 <code>polars-ta</code> 冲突已消除）；release wheel 已按新包名重建并在全新 venv 中安装验证（24 tests 通过）；MkDocs 文档已从该 wheel 生成并通过 <code>mkdocs build --strict</code>；CI 三平台实跑待验证。</li>
 </ul>
 <h2 id="2">2. 里程碑</h2>
@@ -1097,7 +1097,7 @@
 <li>[ ] <code>src/lib.rs</code></li>
 <li><code>#[pymodule] _internal</code></li>
 <li><code>__version__</code></li>
-<li><code>PolarsAllocator</code></li>
+<li>系统 allocator（Arrow release callback 负责释放 buffer）</li>
 <li><code>functions_json()</code> 导出元数据</li>
 <li>[ ] <code>python/polars_ta_lib/__init__.py</code>（先只导出 <code>__version__</code>）</li>
 <li>[ ] <code>.gitignore</code></li>
@@ -1153,7 +1153,7 @@
 <li>空/短序列全 null；</li>
 </ul>
 </li>
-<li><code>PolarsAllocator</code>（在 <code>lib.rs</code>）</li>
+<li>不使用 <code>PolarsAllocator</code>（macOS 导入崩溃）</li>
 <li>[ ] <code>python/polars_ta_lib/__init__.py</code> 增加一个手动 <code>sma</code> 包装用于 smoke。</li>
 </ul>
 <p><strong>验收</strong>：</p>
