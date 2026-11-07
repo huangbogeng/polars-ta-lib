@@ -8,7 +8,7 @@
 [![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-2ea44f.svg)](https://huangbogeng.github.io/polars-ta-lib/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
-[![Polars](https://img.shields.io/badge/polars-2.x-0b7285.svg)](https://pola.rs/)
+[![Polars](https://img.shields.io/badge/polars-1.44%2B-0b7285.svg)](https://pola.rs/)
 [![TA-Lib](https://img.shields.io/badge/TA--Lib-0.8.3-orange.svg)](https://ta-lib.org/)
 [![Rust](https://img.shields.io/badge/rust-1.95%2B-black.svg)](https://www.rust-lang.org/)
 
@@ -41,11 +41,21 @@ pip install polars_ta_lib
 
 # from source
 uv venv
-uv pip install maturin "polars==2.0.0"
+uv pip install maturin "polars>=1.44,<3"
 uv run maturin develop --uv
 ```
 
-Requirements: Python 3.10+, Polars 2.x, Rust 1.95+.
+Requirements: Python 3.10+, Polars 1.44+, Rust 1.95+.
+
+### Compatibility
+
+| Polars | Python | Status |
+|---|---|---|
+| 1.44.2 | 3.10 | tested |
+| 2.0.0 | 3.10 | tested |
+| 2.1.0 | 3.12 | tested |
+
+Polars 2.1 requires Python 3.11+, so Python 3.10 resolves to Polars 1.44–2.0.
 
 ## Quick start
 

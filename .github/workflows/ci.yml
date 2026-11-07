@@ -10,9 +10,24 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.10"]
+        include:
+          - os: ubuntu-latest
+            python-version: "3.10"
+            polars-version: "1.44.2"
+          - os: ubuntu-latest
+            python-version: "3.10"
+            polars-version: "2.0.0"
+          - os: ubuntu-latest
+            python-version: "3.12"
+            polars-version: "2.1.0"
+          - os: macos-latest
+            python-version: "3.10"
+            polars-version: "2.0.0"
+          - os: windows-latest
+            python-version: "3.10"
+            polars-version: "2.0.0"
     runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }} / py${{ matrix.python-version }} / polars${{ matrix.polars-version }}
 
     steps:
       - uses: actions/checkout@v4
@@ -27,7 +42,7 @@ jobs:
 
       - name: Create environment
         shell: bash
-        run: uv venv
+        run: uv venv --python ${{ matrix.python-version }}
 
       - name: Install test dependencies
         shell: bash
@@ -37,7 +52,7 @@ jobs:
           else
             PY=.venv/bin/python
           fi
-          uv pip install --python "$PY" maturin pytest numpy "polars==2.0.0" "polars-talib-fast==2.0.0"
+          uv pip install --python "$PY" maturin pytest numpy "polars==${{ matrix.polars-version }}" "polars-talib-fast==2.0.0"
 
       - name: Build extension
         shell: bash
@@ -60,6 +75,7 @@ jobs:
           "$PY" -m pytest -q
 
       - name: Build documentation
+        if: matrix.os == 'ubuntu-latest' && matrix.polars-version == '2.0.0'
         shell: bash
         run: |
           if [ "$RUNNER_OS" = "Windows" ]; then
@@ -72,7 +88,9 @@ jobs:
           "$PY" -m mkdocs build --strict
 
       - name: Check formatting
+        if: matrix.os == 'ubuntu-latest' && matrix.polars-version == '2.0.0'
         run: cargo fmt --check
 
       - name: Clippy
+        if: matrix.os == 'ubuntu-latest' && matrix.polars-version == '2.0.0'
         run: cargo clippy --all-targets -- -D warnings

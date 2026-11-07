@@ -10,7 +10,7 @@ requires-python = ">=3.10"
 license = "MIT"
 license-files = ["LICENSE", "NOTICE", "LICENSES/TA-Lib.txt"]
 dynamic = ["version"]
-dependencies = ["polars>=2.0,<3"]
+dependencies = ["polars>=1.44,<3"]
 keywords = [
   "polars",
   "ta-lib",

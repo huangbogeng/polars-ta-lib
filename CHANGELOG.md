@@ -15,6 +15,8 @@
 - MkDocs Material API reference generated from TA-Lib metadata.
 - abi3 wheel build, CI matrix, and 24-test suite including 237-function parity
   against `polars-talib-fast==2.0.0`.
+- Tested with Polars 1.44.2 (Python 3.10), 2.0.0 (Python 3.10), and 2.1.0
+  (Python 3.12).
 
 ### Notes
 

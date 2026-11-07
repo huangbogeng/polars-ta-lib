@@ -6,11 +6,11 @@ Thanks for helping improve `polars_ta_lib`.
 
 ```bash
 uv venv
-uv pip install maturin pytest numpy "polars==2.0.0" "polars-talib-fast==2.0.0"
+uv pip install maturin pytest numpy "polars>=1.44,<3" "polars-talib-fast==2.0.0"
 uv run maturin develop --uv
 ```
 
-Requires Rust 1.95+ (see `rust-toolchain.toml`), Python 3.10+, and Polars 2.x.
+Requires Rust 1.95+ (see `rust-toolchain.toml`), Python 3.10+, and Polars 1.44+.
 
 ## Build and test
 
